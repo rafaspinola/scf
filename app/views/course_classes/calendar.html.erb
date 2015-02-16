@@ -1,0 +1,19 @@
+<table class="table table-bordered">
+    <tr>
+        <th>D</th>
+        <th>S</th>
+        <th>T</th>
+        <th>Q</th>
+        <th>Q</th>
+        <th>S</th>
+        <th>S</th>
+    </tr>
+    <% @calendar.each do |w| %>
+    <tr>
+        <% w.each do |d| %>
+        <td><%= check_box "course_class", "dates", {}, d unless d == nil %>
+            <%= "#{d.day}/#{d.month}" unless d == nil %></td>
+        <% end %> 
+    </tr>
+    <% end %>
+</table>

@@ -11,7 +11,127 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118213159) do
+ActiveRecord::Schema.define(version: 20150212014648) do
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.string   "cnpj"
+    t.string   "county_subscription"
+    t.string   "address"
+    t.string   "neighborhood"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "phone"
+    t.string   "responsible_name"
+    t.string   "responsible_email"
+    t.string   "responsible_job_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "course_class_dates", force: true do |t|
+    t.integer  "course_class_id"
+    t.date     "day"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "course_class_dates", ["course_class_id"], name: "index_course_class_dates_on_course_class_id", using: :btree
+
+  create_table "course_classes", force: true do |t|
+    t.integer  "course_id"
+    t.string   "city"
+    t.string   "address"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "course_classes", ["course_id"], name: "index_course_classes_on_course_id", using: :btree
+
+  create_table "course_classes_trainers", force: true do |t|
+    t.integer  "course_class_id"
+    t.integer  "trainer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "course_classes_trainers", ["course_class_id"], name: "index_course_classes_trainers_on_course_class_id", using: :btree
+  add_index "course_classes_trainers", ["trainer_id"], name: "index_course_classes_trainers_on_trainer_id", using: :btree
+
+  create_table "courses", force: true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.decimal  "price6",     precision: 10, scale: 0
+    t.decimal  "price5",     precision: 10, scale: 0
+    t.decimal  "price4",     precision: 10, scale: 0
+    t.decimal  "price3",     precision: 10, scale: 0
+    t.decimal  "price2",     precision: 10, scale: 0
+    t.decimal  "price",      precision: 10, scale: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "participants", force: true do |t|
+    t.string   "name"
+    t.string   "cpf"
+    t.date     "birthday"
+    t.string   "marital_state"
+    t.string   "address"
+    t.string   "neighborhood"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "phone"
+    t.string   "cellphone"
+    t.string   "email"
+    t.string   "profession"
+    t.string   "job_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "salesmen", force: true do |t|
+    t.string   "name"
+    t.string   "bank"
+    t.integer  "agency"
+    t.string   "account"
+    t.string   "operation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subscriptions", force: true do |t|
+    t.integer  "participant_id"
+    t.integer  "course_class_id"
+    t.integer  "company_id"
+    t.integer  "salesman_id"
+    t.decimal  "amount",             precision: 10, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "retains_iss"
+    t.boolean  "charge_company"
+    t.date     "first_payment_date"
+    t.text     "observations"
+    t.string   "payment_method"
+  end
+
+  add_index "subscriptions", ["company_id"], name: "index_subscriptions_on_company_id", using: :btree
+  add_index "subscriptions", ["course_class_id"], name: "index_subscriptions_on_course_class_id", using: :btree
+  add_index "subscriptions", ["participant_id"], name: "index_subscriptions_on_participant_id", using: :btree
+  add_index "subscriptions", ["salesman_id"], name: "index_subscriptions_on_salesman_id", using: :btree
+
+  create_table "trainers", force: true do |t|
+    t.string   "name"
+    t.string   "bank"
+    t.integer  "agency"
+    t.string   "account"
+    t.string   "operation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

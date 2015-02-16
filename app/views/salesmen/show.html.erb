@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @salesman.name %>
+</p>
+
+<p>
+  <strong>Bank:</strong>
+  <%= @salesman.bank %>
+</p>
+
+<p>
+  <strong>Agency:</strong>
+  <%= @salesman.agency %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @salesman.account %>
+</p>
+
+<p>
+  <strong>Operation:</strong>
+  <%= @salesman.operation %>
+</p>
+
+<%= link_to 'Edit', edit_salesman_path(@salesman) %> |
+<%= link_to 'Back', salesmen_path %>

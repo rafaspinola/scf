@@ -1,0 +1,30 @@
+<h1>Listing course_classes</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Treinamento</th>
+      <th>Cidade</th>
+      <th>Início</th>
+      <th>Trainers</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course_classes.each do |course_class| %>
+      <tr>
+        <td><%= course_class.course %></td>
+        <td><%= course_class.city %></td>
+        <td><%= course_class.begin_date %></td>
+        <td><%= course_class.trainer_names %></td>
+        <td><%= link_to 'Show', course_class %></td>
+        <td><%= link_to 'Edit', edit_course_class_path(course_class) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Course class', new_course_class_path %>

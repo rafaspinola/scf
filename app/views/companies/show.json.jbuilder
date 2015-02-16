@@ -1,0 +1,1 @@
+json.extract! @company, :id, :name, :cnpj, :county_subscription, :address, :neighborhood, :city, :state, :postal_code, :phone, :responsible_name, :responsible_email, :responsible_job_description, :created_at, :updated_at

@@ -1,0 +1,33 @@
+<h1>Listing salesmen</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Bank</th>
+      <th>Agency</th>
+      <th>Account</th>
+      <th>Operation</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @salesmen.each do |salesman| %>
+      <tr>
+        <td><%= salesman.name %></td>
+        <td><%= salesman.bank %></td>
+        <td><%= salesman.agency %></td>
+        <td><%= salesman.account %></td>
+        <td><%= salesman.operation %></td>
+        <td><%= link_to 'Show', salesman %></td>
+        <td><%= link_to 'Edit', edit_salesman_path(salesman) %></td>
+        <td><%= link_to 'Destroy', salesman, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Salesman', new_salesman_path %>

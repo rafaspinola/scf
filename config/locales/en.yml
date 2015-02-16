@@ -20,4 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+    courses:
+        cn: "Treinamento"
+        pcn: "Treinamentos"
+        name: "Nome"
+        code: "Siglaaa"
+        price6: "Valor em 6x (1+5x)"
+        price5: "Valor em 5x (1+4x)"
+        price4: "Valor em 4x (1+3x)"
+        price3: "Valor em 3x (1+2x)"
+        price2: "Valor em 2x (1+1x)"
+        price: "Valor à vista"  

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @trainer.name %>
+</p>
+
+<p>
+  <strong>Bank:</strong>
+  <%= @trainer.bank %>
+</p>
+
+<p>
+  <strong>Agency:</strong>
+  <%= @trainer.agency %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @trainer.account %>
+</p>
+
+<p>
+  <strong>Operation:</strong>
+  <%= @trainer.operation %>
+</p>
+
+<%= link_to 'Edit', edit_trainer_path(@trainer) %> |
+<%= link_to 'Back', trainers_path %>

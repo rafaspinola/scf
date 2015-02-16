@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Programa:</strong>
+  <%= @course_class.course %>
+</p>
+
+<p>
+  <strong>Trainers:</strong>
+  <%= @course_class.trainer_names %>
+</p>
+
+<p>
+  <strong>Cidade:</strong>
+  <%= @course_class.city %>
+</p>
+
+<p>
+  <strong>Local das Sessões:</strong>
+  <%= @course_class.address %>
+</p>
+
+<p>
+  <strong>Datas das Sessões:</strong>
+  <%= @course_class.class_dates %>
+</p>
+
+<p>
+  <strong>Horário:</strong>
+  <%= @course_class.class_times %>
+</p>
+
+
+<%= link_to 'Edit', edit_course_class_path(@course_class) %> |
+<%= link_to 'Back', course_classes_path %>

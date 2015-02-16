@@ -1,0 +1,47 @@
+<%= simple_form_for(@subscription) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :course_class, collection: CourseClass.future %>
+    <%= f.association :salesman %>
+  <%= f.simple_fields_for :participant do |pf| %>
+    <%= pf.input :cpf %>
+    <%= pf.input :name %>
+    <%= pf.input :birthday, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12 %>
+    <%= pf.input :marital_state %>
+    <%= pf.input :address %>
+    <%= pf.input :neighborhood %>
+    <%= pf.input :city %>
+    <%= pf.input :state %>
+    <%= pf.input :postal_code %>
+    <%= pf.input :phone %>
+    <%= pf.input :cellphone %>
+    <%= pf.input :email %>
+    <%= pf.input :profession %>
+    <%= pf.input :job_description %>
+  <% end %>
+  <%= f.simple_fields_for :company do |cf| %>
+    <%= cf.input :cnpj %>
+    <%= cf.input :name %>
+    <%= cf.input :county_subscription %>
+    <%= cf.input :address %>
+    <%= cf.input :neighborhood %>
+    <%= cf.input :city %>
+    <%= cf.input :state %>
+    <%= cf.input :postal_code %>
+    <%= cf.input :phone %>
+    <%= cf.input :responsible_name %>
+    <%= cf.input :responsible_email %>
+    <%= cf.input :responsible_job_description %>
+  <% end %>
+    <%= f.input :amount %>
+    <%= f.input :payment_method, collection: ["Boleto bancário", "Depósito em conta corrente", "Cheques"] %>
+    <%= f.input :first_payment_date, as: :date, start_year: Date.today.year, end_year: Date.today.year + 1 %>
+    <%= f.input :retains_iss, as: :radio_buttons %>
+    <%= f.input :charge_company, as: :radio_buttons %>
+    <%= f.input :observations %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

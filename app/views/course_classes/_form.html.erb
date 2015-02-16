@@ -1,0 +1,17 @@
+<%= simple_form_for(@course_class) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :course %>
+    <%= f.association :trainers, as: :check_boxes, label_method: :name, value_method: :id, label: 'Trainers' %>
+    <%= f.input :city %>
+    <%= f.input :address %>
+    <%= f.input :date_list %>
+    <%= f.input :start_time %>
+    <%= f.input :end_time %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

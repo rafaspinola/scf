@@ -1,0 +1,5 @@
+class Course < ActiveRecord::Base
+  def to_s
+    self.code
+  end
+end
