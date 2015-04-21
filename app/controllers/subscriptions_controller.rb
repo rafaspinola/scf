@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   respond_to :html
 
@@ -21,14 +22,22 @@ class SubscriptionsController < ApplicationController
 
   def edit
     a = @subscription.participant.name
-    a = @subscription.company.name unless @subscription.company == nil
+    if @subscription.company == nil
+      @subscription.company = Company.new
+    else
+      a = @subscription.company.name
+    end
     respond_with(@subscription)
   end
 
   def create
     @subscription = Subscription.new(subscription_params)
     @subscription.save
-    respond_with(@subscription)
+    if @subscription.payment_method_requires_payment_document_input?
+      redirect_to(action: :new, controller: :payment_documents, :subscription_id => @subscription.id) 
+    else
+      respond_with(@subscription)
+    end
   end
 
   def update
@@ -47,6 +56,6 @@ class SubscriptionsController < ApplicationController
     end
 
     def subscription_params
-      params.require(:subscription).permit(:participant_id, :course_class_id, :company_id, :salesman_id, :amount, :amount, company_attributes: [:name, :cnpj, :county_subscription, :address, :neighborhood, :city, :state, :postal_code, :phone, :responsible_name, :responsible_email, :responsible_job_description], participant_attributes: [:name, :cpf, :birthday, :marital_state, :address, :neighborhood, :city, :state, :postal_code, :phone, :cellphone, :email, :profession, :job_description])
+      params.require(:subscription).permit(:participant_id, :course_class_id, :company_id, :salesman_id, :amount, :retains_iss, :charge_company, :first_payment_date, :observations, :payment_method, company_attributes: [:name, :cnpj, :county_subscription, :address, :neighborhood, :city, :state, :postal_code, :phone, :responsible_name, :responsible_email, :responsible_job_description], participant_attributes: [:name, :cpf, :birthday, :marital_state, :address, :neighborhood, :city, :state, :postal_code, :phone, :cellphone, :email, :profession, :job_description])
     end
 end

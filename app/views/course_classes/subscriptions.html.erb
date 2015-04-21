@@ -1,0 +1,64 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th><%= I18n.t 'simple_form.labels.participant.name' %></th>
+			<th><%= I18n.t 'simple_form.labels.participant.birthday' %></th>
+			<th><%= I18n.t 'simple_form.labels.subscription.salesman' %></th>
+			<th><%= I18n.t 'simple_form.labels.participant.address' %></th>
+			<th><%= I18n.t 'simple_form.labels.participant.city' %></th>
+			<th><%= I18n.t 'simple_form.labels.participant.postal_code' %></th>
+			<th><%= I18n.t 'simple_form.labels.participant.phone' %></th>
+			<th><%= I18n.t 'simple_form.labels.participant.cellphone' %></th>
+			<th><%= I18n.t 'simple_form.labels.participant.email' %></th>
+			<th><%= I18n.t 'simple_form.labels.participant.cpf' %></th>
+
+			<th><%= I18n.t 'simple_form.labels.company.name' %></th>
+			<th><%= I18n.t 'simple_form.labels.company.address' %></th>
+			<th><%= I18n.t 'simple_form.labels.company.city' %></th>
+			<th><%= I18n.t 'simple_form.labels.company.postal_code' %></th>
+			<th><%= I18n.t 'simple_form.labels.company.phone' %></th>
+			<th><%= I18n.t 'simple_form.labels.company.cnpj' %></th>
+			<th><%= I18n.t 'simple_form.labels.company.responsible_name' %></th>
+			<th><%= I18n.t 'simple_form.labels.company.responsible_email' %></th>
+			<th><%= I18n.t 'simple_form.labels.company.responsible_job_description' %></th>
+
+			<th><%= I18n.t 'simple_form.labels.subscription.amount' %></th>
+			<th><%= I18n.t 'simple_form.labels.subscription.charge_company' %></th>
+			<th><%= I18n.t 'simple_form.labels.subscription.payment_method' %></th>
+			<th><%= I18n.t 'simple_form.labels.subscription.first_payment_date' %></th>
+			<th><%= I18n.t 'simple_form.labels.subscription.observations' %></th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @subscriptions.each do |s| %>
+		<tr>
+			<td><%= s.participant.name %></td>
+			<td><%= s.participant.birthday %></td>
+			<td><%= s.salesman %></td>
+			<td><%= s.participant.address %></td>
+			<td><%= s.participant.city %></td>
+			<td><%= s.participant.postal_code %></td>
+			<td><%= s.participant.phone %></td>
+			<td><%= s.participant.cellphone %></td>
+			<td><%= s.participant.email %></td>
+			<td><%= s.participant.cpf %></td>
+
+			<td><%= s.company.name %></td>
+			<td><%= s.company.address %></td>
+			<td><%= s.company.city %></td>
+			<td><%= s.company.postal_code %></td>
+			<td><%= s.company.phone %></td>
+			<td><%= s.company.cnpj %></td>
+			<td><%= s.company.responsible_name %></td>
+			<td><%= s.company.responsible_email %></td>
+			<td><%= s.company.responsible_job_description %></td>
+
+			<td><%= s.amount %></td>
+			<td><%= s.charge_company %></td>
+			<td><%= s.payment_method %></td>
+			<td><%= s.first_payment_date %></td>
+			<td><%= s.observations %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>

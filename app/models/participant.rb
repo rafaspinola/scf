@@ -5,4 +5,9 @@ class Participant < ActiveRecord::Base
   def to_s
     self.name
   end
+
+  def document
+    self.cpf
+  end
+
 end

@@ -1,6 +1,8 @@
 class CourseClass < ActiveRecord::Base
   belongs_to :course
-  has_many :course_class_dates, dependent: :destroy
+  belongs_to :result_center
+  has_many :course_class_dates
+  has_many :subscriptions
   has_and_belongs_to_many :trainers
 
   after_create :set_dates

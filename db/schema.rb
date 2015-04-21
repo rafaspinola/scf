@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212014648) do
+ActiveRecord::Schema.define(version: 20150421043806) do
+
+  create_table "accounts", force: true do |t|
+    t.string   "description"
+    t.integer  "top_account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "accounts", ["top_account_id"], name: "index_accounts_on_top_account_id", using: :btree
+
+  create_table "banks", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -47,9 +62,12 @@ ActiveRecord::Schema.define(version: 20150212014648) do
     t.time     "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "identifier"
+    t.integer  "result_center_id"
   end
 
   add_index "course_classes", ["course_id"], name: "index_course_classes_on_course_id", using: :btree
+  add_index "course_classes", ["result_center_id"], name: "index_course_classes_on_result_center_id", using: :btree
 
   create_table "course_classes_trainers", force: true do |t|
     t.integer  "course_class_id"
@@ -74,6 +92,26 @@ ActiveRecord::Schema.define(version: 20150212014648) do
     t.datetime "updated_at"
   end
 
+  create_table "movements", force: true do |t|
+    t.date     "due_date"
+    t.string   "description"
+    t.decimal  "value",            precision: 10, scale: 0
+    t.integer  "course_class_id"
+    t.integer  "account_id"
+    t.integer  "result_center_id"
+    t.integer  "bank_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "transfer"
+    t.integer  "to_account_id"
+  end
+
+  add_index "movements", ["account_id"], name: "index_movements_on_account_id", using: :btree
+  add_index "movements", ["bank_id"], name: "index_movements_on_bank_id", using: :btree
+  add_index "movements", ["course_class_id"], name: "index_movements_on_course_class_id", using: :btree
+  add_index "movements", ["result_center_id"], name: "index_movements_on_result_center_id", using: :btree
+  add_index "movements", ["to_account_id"], name: "index_movements_on_to_account_id", using: :btree
+
   create_table "participants", force: true do |t|
     t.string   "name"
     t.string   "cpf"
@@ -93,6 +131,32 @@ ActiveRecord::Schema.define(version: 20150212014648) do
     t.datetime "updated_at"
   end
 
+  create_table "payment_documents", force: true do |t|
+    t.integer  "subscription_id"
+    t.decimal  "value",                 precision: 10, scale: 2
+    t.string   "document_number"
+    t.string   "bank"
+    t.string   "agency"
+    t.string   "account"
+    t.date     "due_date"
+    t.date     "paid_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "generated"
+    t.string   "doc_file_file_name"
+    t.string   "doc_file_content_type"
+    t.integer  "doc_file_file_size"
+    t.datetime "doc_file_updated_at"
+  end
+
+  add_index "payment_documents", ["subscription_id"], name: "index_payment_documents_on_subscription_id", using: :btree
+
+  create_table "result_centers", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "salesmen", force: true do |t|
     t.string   "name"
     t.string   "bank"
@@ -101,6 +165,7 @@ ActiveRecord::Schema.define(version: 20150212014648) do
     t.string   "operation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "identifier"
   end
 
   create_table "subscriptions", force: true do |t|
@@ -116,6 +181,8 @@ ActiveRecord::Schema.define(version: 20150212014648) do
     t.date     "first_payment_date"
     t.text     "observations"
     t.string   "payment_method"
+    t.integer  "sequence"
+    t.integer  "payments_quantity"
   end
 
   add_index "subscriptions", ["company_id"], name: "index_subscriptions_on_company_id", using: :btree
@@ -135,7 +202,7 @@ ActiveRecord::Schema.define(version: 20150212014648) do
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -148,9 +215,20 @@ ActiveRecord::Schema.define(version: 20150212014648) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "role"
+    t.string   "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",      default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

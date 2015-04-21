@@ -1,5 +1,6 @@
 class SalesmenController < ApplicationController
   before_action :set_salesman, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   respond_to :html
 

@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Código da turma:</strong>
+  <%= @course_class.identifier %>
+</p>
+
+<p>
   <strong>Programa:</strong>
   <%= @course_class.course %>
 </p>
@@ -30,6 +35,29 @@
   <%= @course_class.class_times %>
 </p>
 
+<p>
+  <strong>Participantes:</strong>
+</p>
+<table class="table table-striped">
+  <thead>
+    <th>Nome</th>
+    <th>Telefone</th>
+    <th>Celular</th>
+    <th>E-mail</th>
+    <th>
+  </thead>
+  <tbody>
+    <% @course_class.subscriptions.each do |s| %>
+    <tr>
+      <td><%= s.participant.name %></td>
+      <td><%= s.participant.phone %></td>
+      <td><%= s.participant.cellphone %></td>
+      <td><%= s.participant.email %></td>
+      <td><%= link_to 'Ver', s %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_course_class_path(@course_class) %> |
 <%= link_to 'Back', course_classes_path %>

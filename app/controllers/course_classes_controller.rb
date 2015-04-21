@@ -1,5 +1,6 @@
 class CourseClassesController < ApplicationController
   before_action :set_course_class, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   respond_to :html, :json
 
@@ -28,6 +29,7 @@ class CourseClassesController < ApplicationController
   end
 
   def update
+    debugger
     @course_class.update(course_class_params)
     respond_with(@course_class)
   end
@@ -37,10 +39,20 @@ class CourseClassesController < ApplicationController
     respond_with(@course_class)
   end
 
+  def prices
+    @prices = Course.joins(:course_classes).where("course_classes.id = ?", params[:id]).first.get_price_list
+    respond_with(@prices)
+  end
+
   # def dates
   #   @calendar = CourseClassDate.get_dates_from_list(params[:dates])
   #   render json: @calendar
   # end
+
+  def subscriptions
+    @subscriptions = Subscription.where(course_class_id: params[:id])
+    respond_with(@subscriptions)
+  end
 
   private
     def set_course_class
@@ -48,6 +60,6 @@ class CourseClassesController < ApplicationController
     end
 
     def course_class_params
-      params.require(:course_class).permit(:course_id, :city, :address, :start_time, :end_time, :date_list, {:trainer_ids => []})
+      params.require(:course_class).permit(:course_id, :result_center_id, :city, :address, :start_time, :end_time, :date_list, :identifier, {:trainer_ids => []})
     end
 end

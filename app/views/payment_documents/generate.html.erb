@@ -1,0 +1,35 @@
+<h1><%= I18n.t("payment_documents.generate") %></h1>
+<% @open_subscriptions.each do |s| %>
+<div class="form-inputs panel panel-primary">
+    <div class="panel-body">
+        <p>
+            Valor total: <b><%= s.amount %></b> - 
+            Vencimento da 1a parcela: <b><%= s.first_payment_date %></b>
+            Número de parcelas: <b><%= s.payments_quantity %></b>
+        </p>
+        <p>
+            Números dos documentos:<br />
+            <% s.payment_documents.each do |d| %>
+                <%= d.document_number %><br />
+            <% end %>
+        </p>
+        <p>
+            Pagador: <b><%= s.payer.name %></b>
+            CPF/CNPJ: <b><%= s.payer.document %></b><br />
+            CEP: <b><%= s.payer.postal_code %></b>
+            Endereço: <b><%= s.payer.address %></b><br />
+            Bairro: <b><%= s.payer.neighborhood %></b>
+            Cidade: <b><%= s.payer.city %></b>
+            Estado: <b><%= s.payer.state %></b>
+        </p>
+        <%= simple_form_for(s.payment_documents.first,
+                            :html => {multipart: true},
+                            :url => url_for(:action => 'insert', :controller => 'payment_documents'),
+                            :method => 'post') do |f| %>
+            <%= f.file_field :doc_file %>
+            <%= f.input :id, :as => :hidden, :input_html => { :value => s.payment_documents.first.id } %>
+            <%= f.button :submit %>
+        <% end %>
+    </div>
+</div>
+<% end %>

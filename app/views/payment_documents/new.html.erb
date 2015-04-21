@@ -1,0 +1,31 @@
+<%= form_tag payment_documents_create_path do %>
+<%= hidden_field_tag 'subscription_id', @subscription.id %>
+<table class="table table-striped">
+  <thead>
+    <th></th>
+    <th>Banco</th>
+    <th>Agência</th>
+    <th>Conta</th>
+    <th>Número do Cheque</th>
+    <th>Vencimento</th>
+    <th>Valor</th>
+  </thead>
+  <tbody>
+    <% i = 0 %>
+    <% @payments.each do |p| %>
+        <tr>
+        <%= fields_for "payments[]", p do |pf| %>
+            <td style="text-align: right"><%= i = i+1 %></td>
+            <td><%= pf.text_field :bank %></td>
+            <td><%= pf.text_field :agency %></td>
+            <td><%= pf.text_field :account %></td>
+            <td><%= pf.text_field :document_number %></td>
+            <td><%= pf.text_field :due_date %></td>
+            <td><%= pf.text_field :value %></td>
+        <% end %>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= submit_tag %>
+<% end %>

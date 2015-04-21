@@ -1,0 +1,19 @@
+<%= simple_form_for(@movement) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :due_date %>
+    <%= f.input :description %>
+    <%= f.input :value %>
+    <%= f.association :course_class %>
+    <%= f.association :account %>
+    <%= f.association :result_center %>
+    <%= f.association :bank %>
+    <%= f.input :transfer, inline_label: "Transferência" %>
+    <%= f.association :to_account %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

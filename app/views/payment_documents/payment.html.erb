@@ -1,0 +1,33 @@
+<h1>Confirmação de Pagamentos e Compensações</h1>
+<%= form_tag payment_documents_create_path do %>
+<table class="table table-striped">
+  <thead>
+  	<th>Tipo</th>
+    <th>Banco</th>
+    <th>Agência</th>
+    <th>Conta</th>
+    <th>Número do Documento</th>
+    <th>Vencimento</th>
+    <th>Valor</th>
+    <th>Pago?</th>
+    <th>Data de Pagamento</th>
+  </thead>
+  <tbody>
+    <% @payment_documents.each do |p| %>
+      <tr>
+      	<%= fields_for "payment[#{p.id}]", p do |pf| %>
+      	<td><%= PaymentDocumentsHelper.payment_method_description(p.subscription.payment_method) %></td>
+        <td><%= p.bank %></td>
+        <td><%= p.agency %></td>
+        <td><%= p.account %></td>
+        <td><%= p.document_number %></td>
+        <td><%= l p.due_date %></td>
+        <td><%= ntc(p.value) %></td>
+        <td><%= check_box "payment[#{p.id}]", "paid" %></td>
+        <td><%= pf.text_field :paid_date %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

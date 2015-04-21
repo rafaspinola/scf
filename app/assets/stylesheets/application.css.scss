@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+div.radio_buttons div.controls {
+	margin-left: 23px;
+}
+
+input.string, input.tel, input.email, textarea.text {
+	width: 100%;
+}

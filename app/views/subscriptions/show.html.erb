@@ -25,5 +25,40 @@
   <%= @subscription.amount %>
 </p>
 
+<p>
+  <strong>Payments:</strong>
+</p>
+
+<table class="table table-striped">
+  <thead>
+    <% if @subscription.payment_method_requires_payment_document_input? %>
+    <th>Banco</th>
+    <th>Agência</th>
+    <th>Conta</th>
+    <% end %>
+    <th>Número do Documento</th>
+    <th>Vencimento</th>
+    <th>Valor</th>
+    <th>Arquivo</th>
+    <th>Pago?</th>
+  </thead>
+  <tbody>
+    <% @subscription.payment_documents.each do |p| %>
+      <tr>
+        <% if @subscription.payment_method_requires_payment_document_input? %>
+        <td><%= p.bank %></td>
+        <td><%= p.agency %></td>
+        <td><%= p.account %></td>
+        <% end %>
+        <td><%= p.document_number %></td>
+        <td><%= p.due_date %></td>
+        <td><%= p.value %></td>
+        <td><%= link_to("Visualizar", p.doc_file.url, target: "_blank") if p.doc_file? %></td>
+        <td><%= p.paid_date == nil ? "Não" : p.paid_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_subscription_path(@subscription) %> |
 <%= link_to 'Back', subscriptions_path %>

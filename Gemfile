@@ -11,10 +11,12 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'bootstrap-sass'
 gem 'devise'
+gem 'devise_invitable'
 gem 'mysql2'
 gem 'pundit'
 gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
+gem 'paperclip', "~> 4.2"
 group :development do
   gem 'byebug'
   gem 'better_errors'
