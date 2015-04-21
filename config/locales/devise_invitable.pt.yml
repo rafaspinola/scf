@@ -1,24 +1,24 @@
 pt:
   devise:
     failure:
-      invited: "You have a pending invitation, accept it to finish creating your account."
+      invited: "Voc&ecirc; tem um convite pendente, aceite-o para finalizar a cria&ccedil;&atilde;o de sua conta."
     invitations:
-      send_instructions: "An invitation email has been sent to %{email}."
-      invitation_token_invalid: "The invitation token provided is not valid!"
-      updated: "Your password was set successfully. You are now signed in."
-      updated_not_active: "Your password was set successfully."
-      no_invitations_remaining: "No invitations remaining"
-      invitation_removed: "Your invitation was removed."
+      send_instructions: "Um convite foi enviado por email para %{email}."
+      invitation_token_invalid: "O convite n&atilde;o &eacute; v&aacute;lido!"
+      updated: "Voc&ecirc; definiu sua senha com sucesso. Pode usar o sistema agora."
+      updated_not_active: "Voc&ecirc; definiu sua senha com sucesso."
+      no_invitations_remaining: "Sem convites restantes"
+      invitation_removed: "Seu convite foi apagado."
       new:
-        header: "Send invitation"
-        submit_button: "Send an invitation"
+        header: "Enviar um convite"
+        submit_button: "Enviar convite"
       edit:
-        header: "Set your password"
-        submit_button: "Set my password"
+        header: "Defina sua senha"
+        submit_button: "Definir senha"
     mailer:
       invitation_instructions:
-        subject: "Invitation instructions"
-        hello: "Hello %{email}"
-        someone_invited_you: "Someone has invited you to %{url}, you can accept it through the link below."
-        accept: "Accept invitation"
-        ignore: "If you don't want to accept the invitation, please ignore this email.<br />Your account won't be created until you access the link above and set your password."
+        subject: "Acesso ao Sistema de Controle"
+        hello: "Ol&aacute;, %{email}"
+        someone_invited_you: "Algu&eacute;m te convidou para acessar o site %{url}, voc&ecirc; pode aceitar o convite atrav&eacute;s do link abaixo:"
+        accept: "Aceitar convite"
+        ignore: "Se voc&ecirc; n&atilde;o quiser aceitar esse convite, basta ignorar esse email.<br />Sua conta n&atilde;o será criada enquanto voc&ecirc; n&atilde;o acessar o link acima e cadastrar a sua senha."

@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   resources :courses
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
   resources :users
   devise_scope :user do
     authenticated :user do
