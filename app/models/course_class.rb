@@ -22,7 +22,7 @@ class CourseClass < ActiveRecord::Base
   validates_presence_of :course, :city, :address
 
   def to_s
-    "#{self.course.code} - #{self.city} - #{self.begin_date}"
+    "#{self.course.code} - #{self.city} - #{self.identifier}"
   end
 
   def begin_date

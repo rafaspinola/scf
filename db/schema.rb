@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421043806) do
+ActiveRecord::Schema.define(version: 20150426214049) do
 
   create_table "accounts", force: true do |t|
     t.string   "description"
@@ -103,14 +103,16 @@ ActiveRecord::Schema.define(version: 20150421043806) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "transfer"
-    t.integer  "to_account_id"
+    t.integer  "to_bank_id"
+    t.boolean  "accountable"
+    t.boolean  "credit",                                    default: false, null: false
   end
 
   add_index "movements", ["account_id"], name: "index_movements_on_account_id", using: :btree
   add_index "movements", ["bank_id"], name: "index_movements_on_bank_id", using: :btree
   add_index "movements", ["course_class_id"], name: "index_movements_on_course_class_id", using: :btree
   add_index "movements", ["result_center_id"], name: "index_movements_on_result_center_id", using: :btree
-  add_index "movements", ["to_account_id"], name: "index_movements_on_to_account_id", using: :btree
+  add_index "movements", ["to_bank_id"], name: "index_movements_on_to_account_id", using: :btree
 
   create_table "participants", force: true do |t|
     t.string   "name"

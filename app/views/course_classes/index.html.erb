@@ -3,6 +3,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Código</th>
       <th>Treinamento</th>
       <th>Cidade</th>
       <th>Início</th>
@@ -14,6 +15,7 @@
   <tbody>
     <% @course_classes.each do |course_class| %>
       <tr>
+        <td><%= course_class.identifier %></td>
         <td><%= course_class.course %></td>
         <td><%= course_class.city %></td>
         <td><%= course_class.begin_date %></td>

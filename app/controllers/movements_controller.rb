@@ -43,6 +43,6 @@ class MovementsController < ApplicationController
     end
 
     def movement_params
-      params.require(:movement).permit(:due_date, :description, :value, :course_class_id, :account_id, :result_center_id, :bank_id)
+      params.require(:movement).permit(:due_date, :description, :value, :course_class_id, :account_id, :result_center_id, :bank_id, :transfer, :to_bank_id, :credit)
     end
 end

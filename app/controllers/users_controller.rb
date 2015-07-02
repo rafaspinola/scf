@@ -36,3 +36,8 @@ class UsersController < ApplicationController
   end
 
 end
+
+# Itaú
+# Agência 3039
+# Conta corrente 08489-6
+# Ana Clara de O. M. M. Penna

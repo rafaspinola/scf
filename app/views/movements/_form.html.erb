@@ -5,12 +5,13 @@
     <%= f.input :due_date %>
     <%= f.input :description %>
     <%= f.input :value %>
+    <%= f.input :credit, as: :radio_buttons, label: false, collection: [["Crédito/Recebimento", "1"], ["Débito/Pagamento", ""]] %>
     <%= f.association :course_class %>
     <%= f.association :account %>
     <%= f.association :result_center %>
     <%= f.association :bank %>
-    <%= f.input :transfer, inline_label: "Transferência" %>
-    <%= f.association :to_account %>
+    <%= f.input :transfer, inline_label: "Transferência", label: false %>
+    <%= f.association :to_bank %>
   </div>
 
   <div class="form-actions">

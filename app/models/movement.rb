@@ -3,5 +3,9 @@ class Movement < ActiveRecord::Base
   belongs_to :account
   belongs_to :result_center
   belongs_to :bank
-  belongs_to :to_account, class_name: "Account", foreign_key: "to_account_id"
+  belongs_to :to_bank, class_name: "Bank", foreign_key: "to_bank_id"
+
+  validates_presence_of :due_date, :description, :value, :account, :result_center, :bank
+  validates_numericality_of :value, message: "O valor precisa ser um número"
+
 end

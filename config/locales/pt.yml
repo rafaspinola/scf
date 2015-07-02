@@ -38,6 +38,15 @@ pt:
         responsible_name: 'Nome do responsável pela contratação'
         responsible_email: 'Endereço de e-mail do responsável pela contratação'
         responsible_job_description: 'Função do responsável pela contratação'
+      movement: 
+        due_date: "Data"
+        description: "Descrição"
+        value: "Valor"
+        course_class: "Turma"
+        account: "Conta"
+        result_center: "Centro de Resultado"
+        bank: "Conta corrente/caixa"
+        to_bank: "Para a conta corrente/caixa"
   courses:
     cn: "Treinamento"
     pcn: "Treinamentos"
