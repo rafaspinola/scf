@@ -22,7 +22,6 @@ class CourseClassesController < ApplicationController
   end
 
   def create
-    debugger
     @course_class = CourseClass.new(course_class_params)
     @course_class.save
     respond_with(@course_class)
