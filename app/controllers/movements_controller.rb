@@ -5,7 +5,13 @@ class MovementsController < ApplicationController
   respond_to :html
 
   def index
-    @movements = Movement.all
+    @movements = if (params[:sd] || params[:ed])
+      Movement.all.includes(:account, :bank, :result_center).order(:due_date)
+    else
+      Movement.recent.includes(:account, :bank, :result_center).order(:due_date)
+    end
+    @movements = @movements.where("due_date >= ?", params[:sd]) if params[:sd] && !params[:sd].empty?
+    @movements = @movements.where("due_date <= ?", params[:ed]) if params[:ed] && !params[:ed].empty?
     respond_with(@movements)
   end
 
@@ -22,6 +28,7 @@ class MovementsController < ApplicationController
   end
 
   def create
+    debugger
     @movement = Movement.new(movement_params)
     @movement.save
     respond_with(@movement)
