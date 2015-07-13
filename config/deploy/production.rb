@@ -1,7 +1,6 @@
 set :stage, :production
 
-set :repository, "file:///vagrant/projetos/ruby/scf"
-set :local_repository, "file:///vagrant/projetos/ruby/scf"
+set :repo_url, "git@github.com:rafaspinola/scf.git"
 set :deploy_to, "/home/railsapps/scf_dale"
 
 # Simple Role Syntax

@@ -12,3 +12,4 @@ class PaymentDocument < ActiveRecord::Base
     sprintf "%s%s%02d%d", class_identifier, salesmen_identifier, sequence, payment_number
   end
 end
+
