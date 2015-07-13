@@ -5,9 +5,9 @@
     <%= f.input :due_date %>
     <%= f.input :description %>
     <%= f.input :value %>
-    <%= f.input :credit, as: :radio_buttons, label: false, collection: [["Crédito/Recebimento", "1"], ["Débito/Pagamento", ""]] %>
-    <%= f.association :course_class %>
-    <%= f.association :account %>
+    <%= f.input :credit, as: :radio_buttons, label: false, collection: [["Crédito/Recebimento", "1"], ["Débito/Pagamento", "0"]] %>
+    <%= f.association :course_class, collection: CourseClass.includes(:course).order("courses.code, city, identifier desc") %>
+    <%= f.association :account, collection: Account.ordered_list %>
     <%= f.association :result_center %>
     <%= f.association :bank %>
     <%= f.input :transfer, inline_label: "Transferência", label: false %>
