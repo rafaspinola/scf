@@ -39,7 +39,7 @@ class Subscription < ActiveRecord::Base
     for i in 1..s.payments_quantity 
       p = PaymentDocument.create(
         subscription: s,
-        document_number: PaymentDocument.generate_billing_number(s.course_class.identifier, s.salesman.identifier, s.sequence, i),
+        document_number: PaymentDocument.generate_billing_number(s.course_class.course.payment_identifier, s.course_class.identifier, s.salesman.identifier, s.sequence, i),
         value: (s.amount / s.payments_quantity),
         due_date: s.first_payment_date + (i - 1).month,
         generated: false)

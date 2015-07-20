@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150426214049) do
+ActiveRecord::Schema.define(version: 20150717125959) do
 
   create_table "accounts", force: true do |t|
     t.string   "description"
@@ -82,20 +82,21 @@ ActiveRecord::Schema.define(version: 20150426214049) do
   create_table "courses", force: true do |t|
     t.string   "name"
     t.string   "code"
-    t.decimal  "price6",     precision: 10, scale: 0
-    t.decimal  "price5",     precision: 10, scale: 0
-    t.decimal  "price4",     precision: 10, scale: 0
-    t.decimal  "price3",     precision: 10, scale: 0
-    t.decimal  "price2",     precision: 10, scale: 0
-    t.decimal  "price",      precision: 10, scale: 0
+    t.decimal  "price6",             precision: 10, scale: 0
+    t.decimal  "price5",             precision: 10, scale: 0
+    t.decimal  "price4",             precision: 10, scale: 0
+    t.decimal  "price3",             precision: 10, scale: 0
+    t.decimal  "price2",             precision: 10, scale: 0
+    t.decimal  "price",              precision: 10, scale: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "payment_identifier"
   end
 
   create_table "movements", force: true do |t|
     t.date     "due_date"
     t.string   "description"
-    t.decimal  "value",            precision: 10, scale: 0
+    t.decimal  "value",            precision: 10, scale: 2
     t.integer  "course_class_id"
     t.integer  "account_id"
     t.integer  "result_center_id"

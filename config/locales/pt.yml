@@ -1,6 +1,16 @@
 pt:
   simple_form:
     labels:
+      course:
+        name: "Nome"
+        code: "Sigla"
+        price6: "Valor da parcela em 6x (1+5x)"
+        price5: "Valor da parcela em 5x (1+4x)"
+        price4: "Valor da parcela em 4x (1+3x)"
+        price3: "Valor da parcela em 3x (1+2x)"
+        price2: "Valor da parcela em 2x (1+1x)"
+        price: "Valor à vista"
+        payment_identifier: 'Código para geração de boletos'
       subscription:
         course_class: 'Turma'
         salesman: 'Consultor de vendas'
@@ -47,17 +57,6 @@ pt:
         result_center: "Centro de Resultado"
         bank: "Conta corrente/caixa"
         to_bank: "Para a conta corrente/caixa"
-  courses:
-    cn: "Treinamento"
-    pcn: "Treinamentos"
-    name: "Nome"
-    code: "Sigla"
-    price6: "Valor em 6x (1+5x)"
-    price5: "Valor em 5x (1+4x)"
-    price4: "Valor em 4x (1+3x)"
-    price3: "Valor em 3x (1+2x)"
-    price2: "Valor em 2x (1+1x)"
-    price: "Valor à vista"
   payment_documents:
     generate: "Geração de Boletos"
   date:
