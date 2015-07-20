@@ -94,6 +94,8 @@ pt:
       default: "%d/%m/%Y"
       long: "%d de %B de %Y"
       short: "%d de %B"
+      shtweekday: "%d/%m - %a"
+      defweekday: "%d/%m/%Y - %a"
     month_names:
     - 
     - Janeiro

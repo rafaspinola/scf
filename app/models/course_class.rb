@@ -13,8 +13,13 @@ class CourseClass < ActiveRecord::Base
   scope :future, -> { 
     min_dates_sql = CourseClassDate.select("course_class_id, MIN(day) AS day").group("course_class_id").to_sql
     today = Date.today.strftime("%Y-%m-%d")
-    joins("INNER JOIN (#{min_dates_sql}) a ON course_class_id = id").where("a.day >= '#{today}'")
+    joins("INNER JOIN (#{min_dates_sql}) a ON course_class_id = id").where("a.day >= '#{today}'").order("a.day")
+  }
 
+  scope :index_list, -> { 
+    min_dates_sql = CourseClassDate.select("course_class_id, MIN(day) AS day").group("course_class_id").to_sql
+    today = Date.today.strftime("%Y-%m-%d")
+    joins("INNER JOIN (#{min_dates_sql}) a ON course_class_id = id").order("a.day DESC")
   }
 
   # CourseClass.find_by_sql("SELECT * FROM course_classes WHERE id IN (SELECT course_class_id FROM (SELECT course_class_id, MIN(day) AS begin_date FROM course_class_dates GROUP BY course_class_id) a WHERE begin_date >= '" + Date.today.strftime("%Y-%m-%d") + "')")

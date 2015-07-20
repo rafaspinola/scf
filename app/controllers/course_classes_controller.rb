@@ -5,7 +5,7 @@ class CourseClassesController < ApplicationController
   respond_to :html, :json
 
   def index
-    @course_classes = CourseClass.all
+    @course_classes = CourseClass.index_list
     respond_with(@course_classes)
   end
 

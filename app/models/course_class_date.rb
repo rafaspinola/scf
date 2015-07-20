@@ -2,7 +2,7 @@ class CourseClassDate < ActiveRecord::Base
   belongs_to :course_class
 
   def to_s
-    self.day.year == Date.today.year ? self.day.strftime("%d/%m") : self.day.strftime("%d/%m/%Y")
+    self.day.year == Date.today.year ? I18n.l(self.day, format: :shtweekday) : I18n.l(self.day, format: :defweekday) 
   end
 
   def self.get_dates(start_date, end_date)
