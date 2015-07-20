@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717125959) do
+ActiveRecord::Schema.define(version: 20150720220433) do
 
   create_table "accounts", force: true do |t|
     t.string   "description"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 20150717125959) do
     t.string   "doc_file_content_type"
     t.integer  "doc_file_file_size"
     t.datetime "doc_file_updated_at"
+    t.string   "kind"
   end
 
   add_index "payment_documents", ["subscription_id"], name: "index_payment_documents_on_subscription_id", using: :btree
@@ -169,7 +170,10 @@ ActiveRecord::Schema.define(version: 20150717125959) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "identifier"
+    t.integer  "user_id"
   end
+
+  add_index "salesmen", ["user_id"], name: "index_salesmen_on_user_id", using: :btree
 
   create_table "subscriptions", force: true do |t|
     t.integer  "participant_id"
