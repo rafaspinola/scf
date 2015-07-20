@@ -8,7 +8,11 @@
           dataUrl: prices_course_class_path(':course_class_id', format: :json),
           dataTarget: '#subscription_amount'
         } %>
+    <% if current_user.admin? %>
       <%= f.association :salesman %>
+    <% else %>
+      <%= hidden_field_tag "subscription[salesman_id]", current_user.salesman.id %>
+    <% end %>
     </div>
   </div>
   <div class="form-inputs panel panel-primary">
