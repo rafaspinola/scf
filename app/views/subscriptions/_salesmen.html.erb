@@ -1,0 +1,5 @@
+<% if current_user.admin? %>
+	<%= f.association :salesman %>
+<% else %>
+  <%= f.hidden :salesmen, current_user.salesmen.id %>
+<% end %>
