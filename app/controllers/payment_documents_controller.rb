@@ -45,6 +45,7 @@ class PaymentDocumentsController < ApplicationController
       np = []
       for i in 0..(payments.count - 1) do
         np << { kind: "C",
+                generated: true,
                 bank: payments[i][:bank],
                 agency: payments[i][:agency],
                 account: payments[i][:account], 

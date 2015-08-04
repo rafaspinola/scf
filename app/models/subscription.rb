@@ -42,7 +42,8 @@ class Subscription < ActiveRecord::Base
         document_number: PaymentDocument.generate_billing_number(s.course_class.course.payment_identifier, s.course_class.identifier, s.salesman.identifier, s.sequence, i),
         value: (s.amount / s.payments_quantity),
         due_date: s.first_payment_date + (i - 1).month,
-        generated: false)
+        generated: false,
+        kind: "B")
     end
   end
 

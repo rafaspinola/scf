@@ -28,7 +28,6 @@ class MovementsController < ApplicationController
   end
 
   def create
-    debugger
     @movement = Movement.new(movement_params)
     @movement.save
     respond_with(@movement)

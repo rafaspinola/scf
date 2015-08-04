@@ -1,16 +1,21 @@
 <%= form_tag payment_documents_create_path do %>
 <%= hidden_field_tag 'subscription_id', @subscription.id %>
-<table class="table table-striped">
+<table class="table table-striped" id="payments_table">
   <thead>
-    <th></th>
-    <th>Banco</th>
-    <th>Agência</th>
-    <th>Conta</th>
-    <th>Número do Cheque</th>
-    <th>Vencimento</th>
-    <th>Valor</th>
+    <tr>
+        <th></th>
+        <th>Banco</th>
+        <th>Agência</th>
+        <th>Conta</th>
+        <th>Número do Cheque</th>
+        <th>Vencimento</th>
+        <th>Valor</th>
+    </tr>
   </thead>
   <tbody>
+    <tr>
+        <td colspan="7"><a href="#" id="copy">Copiar banco, ag&ecirc;ncia, e conta da primeira linha para todos</a></td>
+    </tr>
     <% i = 0 %>
     <% @payments.each do |p| %>
         <tr>
@@ -21,7 +26,7 @@
             <td><%= pf.text_field :account %></td>
             <td><%= pf.text_field :document_number %></td>
             <td><%= pf.text_field :due_date %></td>
-            <td><%= pf.text_field :value %></td>
+            <td><%= pf.text_field :value, value: (@subscription.amount / @subscription.payments_quantity).to_s %></td>
         <% end %>
         </tr>
     <% end %>
