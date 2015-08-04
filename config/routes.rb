@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :banks
 
-  resources :movements
+  resources :movements do
+    collection do
+      get 'accountant'
+    end
+  end
 
   resources :accounts
 

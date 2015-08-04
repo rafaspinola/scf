@@ -1,4 +1,4 @@
-<h1>Movimentos financeiros</h1>
+<h1>Movimentos Financeiros</h1>
  
 <%= form_tag(movements_path, method: :get) do %>
 <b>Mostrar:</b> <%= link_to "Últimos 3 dias", movements_path(:sd => 3.days.ago.strftime("%Y-%m-%d")) %>&nbsp;
@@ -42,4 +42,4 @@ ou começando em <%= date_field_tag "sd", params[:sd] %> até <%= date_field_tag
 
 <br>
 
-<%= link_to 'New Movement', new_movement_path %>
+<%= link_to 'Novo lançamento', new_movement_path %> | <%= link_to 'Relatório para Contabilidade', accountant_movements_path %>

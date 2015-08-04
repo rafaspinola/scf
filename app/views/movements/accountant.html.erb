@@ -1,0 +1,27 @@
+<h1>Movimentos financeiros para Contabilidade</h1>
+ 
+<%= form_tag(accountant_movements_path, method: :get) do %>
+Começando em <%= date_field_tag "sd", params[:sd] %> até <%= date_field_tag "ed", params[:ed] %> <%= submit_tag "Pesquisar" %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Description</th>
+      <th>Valor</th>
+      <th>CC/Caixa</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movements.each do |movement| %>
+      <tr>
+        <td><%= l movement.due_date %></td>
+        <td><%= movement.description %></td>
+        <td style="text-align: right;"><%= number_to_currency movement.value, unit: "" %>&nbsp;<%= movement.credit ? "C" : "D" %></td>
+        <td><%= movement.bank %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

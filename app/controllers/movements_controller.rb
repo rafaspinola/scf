@@ -15,6 +15,12 @@ class MovementsController < ApplicationController
     respond_with(@movements)
   end
 
+  def accountant
+    @movements = []
+    @movements = Movement.where(accountable: true).where("due_date >= ? and due_date <= ?", params[:sd], params[:ed]) if params[:sd] && !params[:sd].empty? && params[:ed] && !params[:ed].empty?
+    respond_with(@movements)
+  end
+
   def show
     respond_with(@movement)
   end
