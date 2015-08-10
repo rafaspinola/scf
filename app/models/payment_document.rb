@@ -13,15 +13,22 @@ class PaymentDocument < ActiveRecord::Base
   end
 
   def self.update_list(list)
-  	list.each do |k, v|
-  		pd = PaymentDocument.find k
-  		unless pd == nil
-  			pd.due_date = Date.parse v[:due_date]
-  			pd.value = v[:value]
-  			pd.save!
-  		end
-  	end
-  	true
-  end
+  	ActiveRecord::Base.transaction do
+	  	total = 0.0
+	  	subscription = 0
+	  	list.each do |k, v|
+	  		pd = PaymentDocument.find k
+	  		unless pd == nil
+	  			subscription = pd.subscription
+	  			pd.due_date = Date.parse v[:due_date]
+	  			pd.value = v[:value]
+	  			total = total + pd.value
+	  			pd.save!
+	  		end
+	  	end
+	  	subscription.amount = total
+	  	subscription.save
+	  end
+	end
 end
 

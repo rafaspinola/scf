@@ -39,7 +39,7 @@ class CourseClass < ActiveRecord::Base
   end
 
   def class_dates
-    self.course_class_dates.join " "
+    self.course_class_dates.join ", "
   end
 
   def class_times

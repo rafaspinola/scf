@@ -11,7 +11,7 @@ class Subscription < ActiveRecord::Base
 
   scope :payment_documents_to_be_generated, -> { includes(:company, :participant, :payment_documents).joins(:payment_documents).where(payment_documents: { generated: false }) }
 
-  before_save do |s|
+  before_create do |s|
     s.sequence = get_next_subscription_sequence
     s.payments_quantity = s.course_class.course.get_payments_quantity(s.amount)
   end
