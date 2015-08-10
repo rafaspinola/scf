@@ -9,7 +9,7 @@ class Subscription < ActiveRecord::Base
   accepts_nested_attributes_for :participant
   accepts_nested_attributes_for :company
 
-  scope :payment_documents_to_be_generated, -> { joins(:payment_documents).where(payment_documents: { generated: false }) }
+  scope :payment_documents_to_be_generated, -> { includes(:company, :participant, :payment_documents).joins(:payment_documents).where(payment_documents: { generated: false }) }
 
   before_save do |s|
     s.sequence = get_next_subscription_sequence
