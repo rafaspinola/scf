@@ -28,7 +28,6 @@ class CourseClassesController < ApplicationController
   end
 
   def update
-    debugger
     @course_class.update(course_class_params)
     respond_with(@course_class)
   end
