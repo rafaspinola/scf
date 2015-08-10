@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   post 'payment_documents/create'
   post 'payment_documents/insert'
   get 'payment_documents/payment'
+  get 'payment_documents/edit'
+  post 'payment_documents/update'
 
   resources :subscriptions
 

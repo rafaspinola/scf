@@ -1,0 +1,6 @@
+<p>
+    Valor total: <b><%= number_to_currency details.amount %></b> - 
+    Vencimento da 1a parcela: <b><%= l(details.first_payment_date) %></b>
+    Número de parcelas: <b><%= details.payments_quantity %></b><br />
+    <%= raw("<b>Observação:</b> #{details.observations}") if details.has_observations? %>
+</p>

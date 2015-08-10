@@ -30,6 +30,18 @@ class PaymentDocumentsController < ApplicationController
     end
   end
 
+  def edit
+    @subscription = Subscription.find params[:subscription_id]
+    respond_with @subscription
+  end
+
+  def update
+    payments = params[:payments]
+    PaymentDocument.update_list payments
+    redirect_to payment_documents_generate_url
+  end
+
+  # criar aqui código de desvio caso seja usuário master lançando
   def create
     @subscription = Subscription.find params[:subscription_id]
     a = build_payments(params[:payments])

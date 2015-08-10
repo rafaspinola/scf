@@ -61,4 +61,7 @@
 </table>
 
 <%= link_to 'Edit', edit_subscription_path(@subscription) %> |
-<%= link_to 'Back', subscriptions_path %>
+<%= link_to 'Back', subscriptions_path %> |
+<% if @subscription.payment_method_requires_payment_document_generation? %>
+Editar forma de pagamento
+<% end %>

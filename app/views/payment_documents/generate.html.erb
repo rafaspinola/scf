@@ -2,17 +2,29 @@
 <% @open_subscriptions.each do |s| %>
 <div class="form-inputs panel panel-primary">
     <div class="panel-body">
+        <%= render partial: "details", object: s %>
+        <% if s.has_observations? %>
         <p>
-            Valor total: <b><%= s.amount %></b> - 
-            Vencimento da 1a parcela: <b><%= s.first_payment_date %></b>
-            Número de parcelas: <b><%= s.payments_quantity %></b>
+            <%= link_to "Editar datas de vencimento e valores", payment_documents_edit_url(subscription_id: s.id) %> 
         </p>
-        <p>
-            Números dos documentos:<br />
+        <% end %>
+        <table class="table table-striped" style="width: 500px;">
+          <thead>
+            <tr>
+              <th>N&uacute;mero do documento</th>
+              <th>Data de Vencimento</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
             <% s.payment_documents.each do |d| %>
-                <%= d.document_number %><br />
+              <tr>
+                <td><%= d.document_number %></td>
+                <td><%= l d.due_date %></td>
+                <td><%= number_to_currency d.value %></td>
             <% end %>
-        </p>
+          </tbody>
+        </table>
         <p>
             Pagador: <b><%= s.payer.name %></b>
             CPF/CNPJ: <b><%= s.payer.document %></b><br />
@@ -21,6 +33,9 @@
             Bairro: <b><%= s.payer.neighborhood %></b>
             Cidade: <b><%= s.payer.city %></b>
             Estado: <b><%= s.payer.state %></b>
+        </p>
+        <p>
+            Carregar PDF com os boletos
         </p>
         <%= simple_form_for(s.payment_documents.first,
                             :html => {multipart: true},

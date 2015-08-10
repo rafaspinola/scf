@@ -32,6 +32,10 @@ class Subscription < ActiveRecord::Base
     self.payment_method == "C"
   end
 
+  def has_observations?
+    (!self.observations != nil && !self.observations.empty?)
+  end
+
  protected
 
   def build_bank_payment_documents(s)

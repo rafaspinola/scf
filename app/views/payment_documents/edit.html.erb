@@ -1,0 +1,29 @@
+<h1>Editar boletos</h1>
+
+<div class="form-inputs panel panel-primary">
+    <div class="panel-body">
+    <%= render partial: "details", object: @subscription %>
+
+    <%= form_tag payment_documents_update_path do %>
+    <table class="table table-striped" style="width: 400px;">
+      <thead>
+        <tr>
+          <th>Vencimento</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @subscription.payment_documents.each do |p| %>
+            <tr>
+            <%= fields_for "payments[#{p.id}]", p do |pf| %>
+                <td><%= pf.text_field :due_date, value: l(p.due_date) %></td>
+                <td><%= pf.text_field :value, value: p.value %></td>
+            <% end %>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= submit_tag %>
+    <% end %>
+  </div>
+</div>

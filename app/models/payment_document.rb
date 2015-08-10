@@ -11,5 +11,17 @@ class PaymentDocument < ActiveRecord::Base
   def self.generate_billing_number(course_payment_identifier, class_identifier, salesmen_identifier, sequence, payment_number)
     sprintf "%s%s%s%02d%d", course_payment_identifier, class_identifier, salesmen_identifier, sequence, payment_number
   end
+
+  def self.update_list(list)
+  	list.each do |k, v|
+  		pd = PaymentDocument.find k
+  		unless pd == nil
+  			pd.due_date = Date.parse v[:due_date]
+  			pd.value = v[:value]
+  			pd.save!
+  		end
+  	end
+  	true
+  end
 end
 
