@@ -16,6 +16,18 @@ class Subscription < ActiveRecord::Base
     s.payments_quantity = s.course_class.course.get_payments_quantity(s.amount)
   end
 
+  before_save do |s|
+    debugger
+    s.participant.phone = format_phone(s.participant.phone)
+    s.participant.cellphone = format_phone(s.participant.cellphone)
+    s.participant.cpf = format_cpf(s.participant.cpf)
+    s.participant.postal_code = format_postal_code(s.participant.postal_code)
+
+    s.company.phone = format_phone(s.company.phone)
+    s.company.cnpj = format_cnpj(s.company.cnpj)
+    s.company.postal_code = format_postal_code(s.company.postal_code)
+  end
+
   after_create do |s|
     build_bank_payment_documents(s) if s.payment_method == "B"
   end
@@ -62,5 +74,49 @@ class Subscription < ActiveRecord::Base
 
   def get_last_subscription
   	Subscription.where(course_class_id: self.course_class.id).order(:sequence).last
+  end
+
+  def clear_number(data)
+    data.gsub(/[^\d]/, "")
+  end
+
+  def format_phone(data)
+    data = clear_number(data)
+    m = data.match(/(\d{2})(\d{4,5})(\d{4})/)
+    if m == nil
+      data
+    else
+      "(#{m[1]}) #{m[2]}-#{m[3]}"
+    end
+  end
+
+  def format_postal_code(data)
+    data = clear_number(data)
+    m = data.match(/(\d{2})(\d{3})(\d{3})/)
+    if m == nil
+      data
+    else
+      "#{m[1]}.#{m[2]}-#{m[3]}"
+    end
+  end
+
+  def format_cpf(data)
+    data = clear_number(data)
+    m = data.match(/(\d{3})(\d{3})(\d{3})(\d{2})/)
+    if m == nil
+      data
+    else
+      "#{m[1]}.#{m[2]}.#{m[3]}-#{m[4]}"
+    end
+  end
+
+  def format_cnpj(data)
+    data = clear_number(data)
+    m = data.match(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/)
+    if m == nil
+      data
+    else
+      "#{m[1]}.#{m[2]}.#{m[3]}/#{m[4]}-#{m[5]}"
+    end
   end
 end
