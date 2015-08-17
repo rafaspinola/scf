@@ -12,6 +12,7 @@ class MovementsController < ApplicationController
     end
     @movements = @movements.where("due_date >= ?", params[:sd]) if params[:sd] && !params[:sd].empty?
     @movements = @movements.where("due_date <= ?", params[:ed]) if params[:ed] && !params[:ed].empty?
+    @movements = @movements.where("description LIKE ?", "%#{params[:d]}%") if params[:d] && !params[:d].empty?
     respond_with(@movements)
   end
 

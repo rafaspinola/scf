@@ -4,8 +4,10 @@
 <b>Mostrar:</b> <%= link_to "Últimos 3 dias", movements_path(:sd => 3.days.ago.strftime("%Y-%m-%d")) %>&nbsp;
 <%= link_to "Últimos 7 dias", movements_path(:sd => 7.days.ago.strftime("%Y-%m-%d")) %>&nbsp;
 <%= link_to "Últimos 15 dias", movements_path(:sd => 15.days.ago.strftime("%Y-%m-%d")) %>&nbsp;
-<%= link_to "Últimos 30 dias", movements_path(:sd => 30.days.ago.strftime("%Y-%m-%d")) %>
-ou começando em <%= date_field_tag "sd", params[:sd] %> até <%= date_field_tag "ed", params[:ed] %> <%= submit_tag "Pesquisar" %>
+<%= link_to "Últimos 30 dias", movements_path(:sd => 30.days.ago.strftime("%Y-%m-%d")) %><br />
+Começando em <%= date_field_tag "sd", params[:sd] %> até <%= date_field_tag "ed", params[:ed] %>
+Descrição: <%= text_field_tag "d", params[:d] %>
+<%= submit_tag "Pesquisar" %>
 <% end %>
 
 <table class="table table-striped">
