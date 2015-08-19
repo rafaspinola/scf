@@ -59,7 +59,7 @@
     <div class="panel-heading">Dados de Cobrança</div>
     <div class="panel-body">
       <a name="conditions"></a>
-      <%= f.input :amount, as: :select, collection: ["Escolha a turma"], include_blank: false %> <%= link_to "Atualizar forma de pagamento", "#conditions", onclick: "$('#subscription_course_class_id').priceSelectable();$('#subscription_course_class_id').trigger('change');$('#{link_update').delete();}", id: "link_update" %>
+      <%= f.input :amount, as: :select, collection: ["Escolha a turma"], include_blank: false %> <%= link_to "Atualizar forma de pagamento", "#conditions", onclick: "$('#subscription_course_class_id').priceSelectable();$('#subscription_course_class_id').trigger('change');$('#link_update').delete();", id: "link_update" %>
       <%= f.input :payment_method, collection: [["Boleto bancário", "B"], ["Depósito em conta corrente", "D"], ["Cheques", "C"]] %>
       <%= f.input :first_payment_date, as: :date, start_year: Date.today.year, end_year: Date.today.year + 1 %>
       <%= f.input :retains_iss, as: :radio_buttons %>
