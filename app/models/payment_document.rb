@@ -14,7 +14,7 @@ class PaymentDocument < ActiveRecord::Base
 
   def self.mark_as_generated_by_subscription(subscription_id)
     ActiveRecord::Base.transaction do
-      pd = PaymentDocument.where(subscription_id: 29, generated: false)
+      pd = PaymentDocument.where(subscription_id: subscription_id, generated: false)
       pd.each do |p|
         p.generated = true
         p.save
