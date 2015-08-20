@@ -12,6 +12,16 @@ class PaymentDocument < ActiveRecord::Base
     sprintf "%s%s%s%02d%d", course_payment_identifier, class_identifier, salesmen_identifier, sequence, payment_number
   end
 
+  def self.mark_as_generated_by_subscription(subscription_id)
+    ActiveRecord::Base.transaction do
+      pd = PaymentDocument.where(subscription_id: 29, generated: false)
+      pd.each do |p|
+        p.generated = true
+        p.save
+      end
+    end
+  end
+
   def self.update_list(list)
   	ActiveRecord::Base.transaction do
 	  	total = 0.0

@@ -13,6 +13,7 @@ class PaymentDocumentsController < ApplicationController
     params = payment_document_params
     params[:generated] = true
     @payment_document.update(params)
+    PaymentDocument.mark_as_generated_by_subscription(@payment_document.subscription_id)
     redirect_to action: :generate
   end
 
