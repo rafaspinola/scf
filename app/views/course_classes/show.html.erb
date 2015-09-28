@@ -47,7 +47,7 @@
     <th>
   </thead>
   <tbody>
-    <% @course_class.subscriptions.each do |s| %>
+    <% @course_class.subscriptions.includes(:participant).order("participants.name").each do |s| %>
     <tr>
       <td><%= s.participant.name %></td>
       <td><%= s.participant.phone %></td>
