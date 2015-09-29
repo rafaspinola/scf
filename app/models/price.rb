@@ -5,7 +5,7 @@ class Price < ActiveRecord::Base
   before_destroy :check_subscriptions
   before_update :check_subscriptions
 
-  scope :active_prices, where('active = 1').order('payment_quantity DESC')
+  scope :active_prices, where('active = 1').order('description, payment_quantity DESC')
 
   def total_value
   	self.payment_quantity * self.payment_value
