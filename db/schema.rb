@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804014610) do
+ActiveRecord::Schema.define(version: 20150929201818) do
 
   create_table "accounts", force: true do |t|
     t.string   "description"
@@ -157,6 +157,18 @@ ActiveRecord::Schema.define(version: 20150804014610) do
 
   add_index "payment_documents", ["subscription_id"], name: "index_payment_documents_on_subscription_id", using: :btree
 
+  create_table "prices", force: true do |t|
+    t.integer  "course_id"
+    t.string   "description"
+    t.decimal  "payment_value",    precision: 10, scale: 2
+    t.integer  "payment_quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "enabled"
+  end
+
+  add_index "prices", ["course_id"], name: "index_prices_on_course_id", using: :btree
+
   create_table "result_centers", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -173,6 +185,7 @@ ActiveRecord::Schema.define(version: 20150804014610) do
     t.datetime "updated_at"
     t.string   "identifier"
     t.integer  "user_id"
+    t.string   "phone"
   end
 
   add_index "salesmen", ["user_id"], name: "index_salesmen_on_user_id", using: :btree
@@ -192,11 +205,13 @@ ActiveRecord::Schema.define(version: 20150804014610) do
     t.string   "payment_method"
     t.integer  "sequence"
     t.integer  "payments_quantity"
+    t.integer  "price_id"
   end
 
   add_index "subscriptions", ["company_id"], name: "index_subscriptions_on_company_id", using: :btree
   add_index "subscriptions", ["course_class_id"], name: "index_subscriptions_on_course_class_id", using: :btree
   add_index "subscriptions", ["participant_id"], name: "index_subscriptions_on_participant_id", using: :btree
+  add_index "subscriptions", ["price_id"], name: "index_subscriptions_on_price_id", using: :btree
   add_index "subscriptions", ["salesman_id"], name: "index_subscriptions_on_salesman_id", using: :btree
 
   create_table "trainers", force: true do |t|
@@ -207,6 +222,7 @@ ActiveRecord::Schema.define(version: 20150804014610) do
     t.string   "operation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phone"
   end
 
   create_table "users", force: true do |t|

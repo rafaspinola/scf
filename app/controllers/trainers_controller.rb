@@ -43,6 +43,6 @@ class TrainersController < ApplicationController
     end
 
     def trainer_params
-      params.require(:trainer).permit(:name, :bank, :agency, :account, :operation)
+      params.require(:trainer).permit(:name, :bank, :agency, :account, :operation, :phone)
     end
 end

@@ -56,6 +56,6 @@ class SubscriptionsController < ApplicationController
     end
 
     def subscription_params
-      params.require(:subscription).permit(:participant_id, :course_class_id, :company_id, :salesman_id, :amount, :retains_iss, :charge_company, :first_payment_date, :observations, :payment_method, company_attributes: [:name, :cnpj, :county_subscription, :address, :neighborhood, :city, :state, :postal_code, :phone, :responsible_name, :responsible_email, :responsible_job_description], participant_attributes: [:name, :cpf, :birthday, :marital_state, :address, :neighborhood, :city, :state, :postal_code, :phone, :cellphone, :email, :profession, :job_description])
+      params.require(:subscription).permit(:participant_id, :course_class_id, :company_id, :salesman_id, :price_id, :retains_iss, :charge_company, :first_payment_date, :observations, :payment_method, company_attributes: [:name, :cnpj, :county_subscription, :address, :neighborhood, :city, :state, :postal_code, :phone, :responsible_name, :responsible_email, :responsible_job_description], participant_attributes: [:name, :cpf, :birthday, :marital_state, :address, :neighborhood, :city, :state, :postal_code, :phone, :cellphone, :email, :profession, :job_description])
     end
 end

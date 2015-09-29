@@ -56,8 +56,8 @@
         <td><%= p.account %></td>
         <% end %>
         <td><%= p.document_number %></td>
-        <td><%= p.due_date %></td>
-        <td><%= p.value %></td>
+        <td><%= l p.due_date %></td>
+        <td style="text-align: right;"><%= number_to_currency p.value %></td>
         <td><%= link_to("Visualizar", p.doc_file.url, target: "_blank") if p.doc_file? %></td>
         <td><%= p.paid_date == nil ? "Não" : p.paid_date %></td>
       </tr>

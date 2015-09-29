@@ -1,6 +1,7 @@
 class Course < ActiveRecord::Base
 
   has_many :course_classes
+  has_many :prices
 
   validates :payment_identifier, uniqueness: true, length: { maximum: 1 }
 
@@ -8,16 +9,16 @@ class Course < ActiveRecord::Base
     self.code
   end
 
-  def get_price_list
-    prices = [
-      build_total_price_item(6, self.price6),
-      build_total_price_item(5, self.price5),
-      build_total_price_item(4, self.price4),
-      build_total_price_item(3, self.price3),
-      build_total_price_item(2, self.price2),
-      build_total_price_item(1, self.price)
-    ]
-  end
+  # def get_price_list
+  #   prices = [
+  #     build_total_price_item(6, self.price6),
+  #     build_total_price_item(5, self.price5),
+  #     build_total_price_item(4, self.price4),
+  #     build_total_price_item(3, self.price3),
+  #     build_total_price_item(2, self.price2),
+  #     build_total_price_item(1, self.price)
+  #   ]
+  # end
 
   def build_total_price_item(number_of_payments, payment_value)
     total_value = number_of_payments * payment_value

@@ -1,4 +1,5 @@
 class Company < ActiveRecord::Base
+  include ApplicationHelper
 
   def to_s
     self.name
@@ -7,4 +8,11 @@ class Company < ActiveRecord::Base
   def document
   	self.cnpj
   end
+
+	before_save do |c|
+    c.phone = format_phone(c.phone)
+    c.cnpj = format_cnpj(c.cnpj)
+    c.postal_code = format_postal_code(c.postal_code)
+  end
+
 end

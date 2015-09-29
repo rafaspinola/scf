@@ -1,6 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
 $.fn.extend
   priceSelectable: ->
     $(@).each (i, el) ->
@@ -11,15 +12,19 @@ class PriceSelectable
     @init($select)
 
   init: ($select) ->
-    @urlTemplate = $select.attr('dataurl')
-    @targetSelect = $($select.attr('datatarget'))
+    console.log $select
+    console.log $select.attr('dataUrl')
+    console.log $select.attr('dataTarget')
+    @urlTemplate = $select.attr('dataUrl')
+    @targetSelect = $($select.attr('dataTarget'))
     $select.on 'change', =>
       @clearTarget()
       url = @constructUrl($select.val())
       if url
         $.getJSON url, (data) =>
           $.each data, (index, el) =>
-            @targetSelect.append "<option value='" + el.id + "'>" + el.value + "</option>"
+            desc = if (el.payment_quantity == 1) then " parcela" else " parcelas"
+            @targetSelect.append "<option value='" + el.id + "'>" + el.description + " - " + el.payment_quantity + desc + " de R$ " + el.payment_value + "</option>"
             # reinitialize target select
           @reinitializeTarget()
       else
@@ -32,6 +37,7 @@ class PriceSelectable
     @targetSelect.html('<option></option>')
 
   constructUrl: (id) ->
+    console.log @urlTemplate
     if id && id != ''
       @urlTemplate.replace(/:.*_id/, id)
 

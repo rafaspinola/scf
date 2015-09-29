@@ -43,6 +43,6 @@ class SalesmenController < ApplicationController
     end
 
     def salesman_params
-      params.require(:salesman).permit(:name, :bank, :agency, :account, :operation, :identifier)
+      params.require(:salesman).permit(:name, :bank, :agency, :account, :operation, :identifier, :phone)
     end
 end
