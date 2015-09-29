@@ -20,5 +20,10 @@
   <%= @price.payment_quantity %>
 </p>
 
+<p>
+  <strong>Active:</strong>
+  <%= @price.active %>
+</p>
+
 <%= link_to 'Edit', edit_price_path(@price) %> |
 <%= link_to 'Back', prices_path %>

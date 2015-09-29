@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
 
   has_many :course_classes
-  has_many :prices, -> { active_prices }
+  has_many :prices
 
   validates :payment_identifier, uniqueness: true, length: { maximum: 1 }
 
@@ -19,6 +19,10 @@ class Course < ActiveRecord::Base
   #     build_total_price_item(1, self.price)
   #   ]
   # end
+
+  def active_prices
+    prices.where('active = 1')
+  end
 
   def build_total_price_item(number_of_payments, payment_value)
     total_value = number_of_payments * payment_value

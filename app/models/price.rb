@@ -14,7 +14,7 @@ class Price < ActiveRecord::Base
   protected
 
   def check_subscriptions
-  	if subscriptions.count > 0
+  	if active && subscriptions.count > 0
   		errors.add_to_base("não pode editar ou apagar tabela de preço associada a uma inscrição")
   		return false
   	end

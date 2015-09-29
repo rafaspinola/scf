@@ -40,7 +40,7 @@ class CourseClassesController < ApplicationController
   def prices
     #@prices = Course.joins(:course_classes).where("course_classes.id = ?", params[:id]).first.get_price_list
     cc = CourseClass.find params[:id]
-    @prices = cc.course.prices
+    @prices = cc.course.active_prices
     respond_with(@prices)
   end
 
