@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929201818) do
+ActiveRecord::Schema.define(version: 20150929213622) do
 
   create_table "accounts", force: true do |t|
     t.string   "description"
@@ -82,12 +82,6 @@ ActiveRecord::Schema.define(version: 20150929201818) do
   create_table "courses", force: true do |t|
     t.string   "name"
     t.string   "code"
-    t.decimal  "price6",             precision: 10, scale: 0
-    t.decimal  "price5",             precision: 10, scale: 0
-    t.decimal  "price4",             precision: 10, scale: 0
-    t.decimal  "price3",             precision: 10, scale: 0
-    t.decimal  "price2",             precision: 10, scale: 0
-    t.decimal  "price",              precision: 10, scale: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "payment_identifier"
