@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
 
   has_many :course_classes
-  has_many :prices
+  has_many :prices, -> { active_prices }
 
   validates :payment_identifier, uniqueness: true, length: { maximum: 1 }
 
