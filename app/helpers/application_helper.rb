@@ -3,7 +3,7 @@ module ApplicationHelper
     number_to_currency(value, :format => "%u %n", :separator => ",", :delimiter => ".", :unit => "R$")
   end
 
-    def clear_number(data)
+  def clear_number(data)
     data.gsub(/[^\d]/, "")
   end
 
@@ -34,19 +34,21 @@ module ApplicationHelper
     data = clear_number(data)
     m = data.match(/(\d{3})(\d{3})(\d{3})(\d{2})/)
     if m == nil
-      data
+      r = data
     else
-      "#{m[1]}.#{m[2]}.#{m[3]}-#{m[4]}"
+      r = "#{m[1]}.#{m[2]}.#{m[3]}-#{m[4]}"
     end
+    r
   end
 
   def format_cnpj(data)
     data = clear_number(data)
     m = data.match(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/)
     if m == nil
-      data
+      r = data
     else
-      "#{m[1]}.#{m[2]}.#{m[3]}/#{m[4]}-#{m[5]}"
+      r = "#{m[1]}.#{m[2]}.#{m[3]}/#{m[4]}-#{m[5]}"
     end
+    r
   end
 end
