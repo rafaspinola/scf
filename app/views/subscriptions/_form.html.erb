@@ -27,7 +27,7 @@
       <%= pf.input :phone, hint: "Telefone com DDD" %>
       <%= pf.input :cellphone, hint: "Telefone com DDD" %>
       <%= pf.input :city %>
-      <%= pf.input :state %>
+      <%= pf.input :state, input_html: { maxlength: 2 } %>
       <%= pf.input :postal_code %>
       <%= pf.input :email %>
       <%= pf.input :cpf %>

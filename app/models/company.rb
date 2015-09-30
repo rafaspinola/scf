@@ -35,7 +35,7 @@ class Company < ActiveRecord::Base
 
   def check_number_lengths
     errors.add(:cnpj, "O CNPJ informado está incorreto.") unless check_number_count(cnpj, 14)
-    errors.add(:postal_code, "O CEP informado está incorreto.") unless check_number_count(postal_code, 11)
+    errors.add(:postal_code, "O CEP informado está incorreto.") unless check_number_count(postal_code, 8)
     errors.add(:phone, "O telefone informado está incorreto.") unless check_number_count(phone, 10, 11)
   end
 
