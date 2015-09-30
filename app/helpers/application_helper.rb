@@ -20,7 +20,6 @@ module ApplicationHelper
 
   def format_postal_code(data)
     data = clear_number(data)
-    debugger
     m = data.match(/(\d{2})(\d{3})(\d{3})/)
     if m == nil
       r = data
