@@ -11,14 +11,16 @@ class Subscription < ActiveRecord::Base
 
   scope :payment_documents_to_be_generated, -> { includes(:company, :participant, :payment_documents).joins(:payment_documents).where(payment_documents: { generated: false }) }
 
-  before_create do |s|
-    s.sequence = get_next_subscription_sequence
+  validates_presence_of :salesman, message: "Selecione o vendedor"
+  validates_presence_of :course_class, message: "Selecione a turma a qual se refere essa inscrição"
+  validates_presence_of :payment_method
+  validates_inclusion_of :charge_company, :in => [true, false], message: "Informe para quem será feita a cobrança / emitidos os boletos"
+  validates_inclusion_of :retains_iss, :in => [true, false], message: "SOMENTE PARA EMPRESAS COM SEDE EM BELO HORIZONTE: Informe se a empresa retém ISS ou não."
+  validates_associated :participant, :company
+  validate :check_pf_pj_info
+  validate :check_first_payment_date
 
-    # No campo amount vem o id do price selecionado
-    price = Price.find s.price_id
-    s.payments_quantity = price.payment_quantity
-    s.amount = price.total_value
-  end
+  before_create :fill_sequence, :fill_price
 
   # TODO: validador:
   # Não permitir data do primeiro pagamento após o início da turma
@@ -42,6 +44,11 @@ class Subscription < ActiveRecord::Base
 
   def has_observations?
     (!self.observations != nil && !self.observations.empty?)
+  end
+
+  def first_training_date
+    return (Date.today - 100.years) if course_class == nil || course_class.course_class_dates == nil
+    course_class.course_class_dates.order("day ASC").first.day
   end
 
  protected
@@ -70,5 +77,33 @@ class Subscription < ActiveRecord::Base
 
   def get_last_subscription
   	Subscription.where(course_class_id: self.course_class.id).order(:sequence).last
+  end
+
+  def fill_sequence
+    sequence = get_next_subscription_sequence
+  end
+
+  def fill_price
+    price = Price.find price_id
+    payments_quantity = price.payment_quantity
+    amount = price.total_value
+  end
+
+  def check_pf_pj_info
+    if charge_company then
+      add_entity_errors(company, company.valid_for_charging)
+    else
+      add_entity_errors(participant, participant.valid_for_charging)
+    end
+  end
+
+  def add_entity_errors(entity, err)
+    err.each do |e|
+      entity.errors.add(e[0], e[1])
+    end
+  end
+
+  def check_first_payment_date
+    errors.add(:first_payment_date, "O primeiro pagamento não pode ser posterior ao início da turma.") if first_payment_date > first_training_date
   end
 end
