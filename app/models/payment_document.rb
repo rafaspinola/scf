@@ -8,8 +8,13 @@ class PaymentDocument < ActiveRecord::Base
   scope :to_be_generated, -> { where(generated: false) }
   scope :to_be_confirmed, -> { includes(:subscription).where(paid_date: nil).order("subscriptions.payment_method") }
 
-  def self.generate_billing_number(course_payment_identifier, class_identifier, salesmen_identifier, sequence, payment_number)
-    sprintf "%s%s%s%02d%d", course_payment_identifier, class_identifier, salesmen_identifier, sequence, payment_number
+  def self.generate_billing_number(course_payment_identifier, class_identifier, salesmen_identifier, sequence, payment_number, double_payment_number_digits = false)
+    sprintf(get_billing_number_format(double_payment_number_digits), course_payment_identifier, class_identifier, salesmen_identifier, sequence, payment_number)
+  end
+
+  def self.get_billing_number_format(double_payment_number_digits)
+    double_payment_number_digits ? "%s%s%s%02d%02d" : "%s%s%s%02d%d"
+
   end
 
   def self.mark_as_generated_by_subscription(subscription_id)

@@ -21,6 +21,7 @@ class Subscription < ActiveRecord::Base
   validate :check_pf_pj_info
   validate :check_first_payment_date
 
+  after_validation :clear_empty_company
   before_create :fill_sequence, :fill_price
 
   # TODO: validador:
@@ -58,7 +59,7 @@ class Subscription < ActiveRecord::Base
     for i in 1..s.payments_quantity 
       p = PaymentDocument.create(
         subscription: s,
-        document_number: PaymentDocument.generate_billing_number(s.course_class.course.payment_identifier, s.course_class.identifier, s.salesman.identifier, s.sequence, i),
+        document_number: PaymentDocument.generate_billing_number(s.course_class.course.payment_identifier, s.course_class.identifier, s.salesman.identifier, s.sequence, i, payments_quantity > 9),
         value: s.price.payment_value,
         due_date: s.first_payment_date + (i - 1).month,
         generated: false,
@@ -87,6 +88,11 @@ class Subscription < ActiveRecord::Base
     price = Price.find price_id
     self.payments_quantity = price.payment_quantity
     self.amount = price.total_value
+  end
+
+  def clear_empty_company
+    debugger
+    self.company = nil if self.company.empty?
   end
 
   def check_pf_pj_info

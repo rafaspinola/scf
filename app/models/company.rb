@@ -9,6 +9,14 @@ class Company < ActiveRecord::Base
   	self.cnpj
   end
 
+  def empty?
+    emp = true
+    self.attributes.each_pair do |k, v|
+      emp = emp && (v == nil || v.empty?)
+    end
+    emp
+  end
+
 	before_save do |c|
     c.phone = format_phone(c.phone)
     c.cnpj = format_cnpj(c.cnpj)
