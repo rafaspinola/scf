@@ -3,6 +3,7 @@ class Subscription < ActiveRecord::Base
   belongs_to :course_class
   belongs_to :company
   belongs_to :salesman
+  belongs_to :price
 
   has_many :payment_documents
 
@@ -54,12 +55,11 @@ class Subscription < ActiveRecord::Base
  protected
 
   def build_bank_payment_documents(s)
-    
     for i in 1..s.payments_quantity 
       p = PaymentDocument.create(
         subscription: s,
         document_number: PaymentDocument.generate_billing_number(s.course_class.course.payment_identifier, s.course_class.identifier, s.salesman.identifier, s.sequence, i),
-        value: (s.amount / s.payments_quantity),
+        value: s.price.payment_value,
         due_date: s.first_payment_date + (i - 1).month,
         generated: false,
         kind: "B")
@@ -80,13 +80,13 @@ class Subscription < ActiveRecord::Base
   end
 
   def fill_sequence
-    sequence = get_next_subscription_sequence
+    self.sequence = get_next_subscription_sequence
   end
 
   def fill_price
     price = Price.find price_id
-    payments_quantity = price.payment_quantity
-    amount = price.total_value
+    self.payments_quantity = price.payment_quantity
+    self.amount = price.total_value
   end
 
   def check_pf_pj_info
