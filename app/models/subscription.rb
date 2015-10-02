@@ -91,8 +91,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def clear_empty_company
-    debugger
-    self.company = nil if self.company.empty?
+    self.company = nil if self.company == nil || self.company.empty?
   end
 
   def check_pf_pj_info

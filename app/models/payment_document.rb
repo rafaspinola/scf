@@ -29,6 +29,7 @@ class PaymentDocument < ActiveRecord::Base
 
   def self.update_list(list)
   	ActiveRecord::Base.transaction do
+      # TODO: regerar códigos de boletos, quando houver a possibilidade de adicionar novos boletos
 	  	total = 0.0
 	  	subscription = 0
 	  	list.each do |k, v|
