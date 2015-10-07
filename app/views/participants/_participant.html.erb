@@ -1,24 +1,69 @@
-<%= simple_form_for(@participant) do |f| %>
-  <%= f.error_notification %>
+<p>
+  <strong>Name:</strong>
+  <%= participant.name %>
+</p>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :cpf %>
-    <%= f.input :birthday %>
-    <%= f.input :marital_state %>
-    <%= f.input :address %>
-    <%= f.input :neighborhood %>
-    <%= f.input :city %>
-    <%= f.input :state %>
-    <%= f.input :postal_code %>
-    <%= f.input :phone %>
-    <%= f.input :cellphone %>
-    <%= f.input :email %>
-    <%= f.input :profession %>
-    <%= f.input :job_description %>
-  </div>
+<p>
+  <strong>Cpf:</strong>
+  <%= participant.cpf %>
+</p>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+<p>
+  <strong>Birthday:</strong>
+  <%= participant.birthday %>
+</p>
+
+<p>
+  <strong>Marital state:</strong>
+  <%= participant.marital_state %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= participant.address %>
+</p>
+
+<p>
+  <strong>Neighborhood:</strong>
+  <%= participant.neighborhood %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= participant.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= participant.state %>
+</p>
+
+<p>
+  <strong>Postal code:</strong>
+  <%= participant.postal_code %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= participant.phone %>
+</p>
+
+<p>
+  <strong>Cellphone:</strong>
+  <%= participant.cellphone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= participant.email %>
+</p>
+
+<p>
+  <strong>Profession:</strong>
+  <%= participant.profession %>
+</p>
+
+<p>
+  <strong>Job description:</strong>
+  <%= participant.job_description %>
+</p>

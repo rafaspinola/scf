@@ -2,12 +2,12 @@
 
 <p>
   <strong>Participant:</strong>
-  <%= @subscription.participant %>
+  <%= render @subscription.participant %>
 </p>
 
 <p>
-  <strong>Participant Email:</strong>
-  <%= @subscription.participant.email %>
+  <strong>Company:</strong>
+  <%= render @subscription.company unless @subscription.company == nil %>
 </p>
 
 <p>

@@ -1,22 +1,59 @@
-<%= simple_form_for(@company) do |f| %>
-  <%= f.error_notification %>
+<p>
+  <strong>Name:</strong>
+  <%= company.name %>
+</p>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :cnpj %>
-    <%= f.input :county_subscription %>
-    <%= f.input :address %>
-    <%= f.input :neighborhood %>
-    <%= f.input :city %>
-    <%= f.input :state %>
-    <%= f.input :postal_code %>
-    <%= f.input :phone %>
-    <%= f.input :responsible_name %>
-    <%= f.input :responsible_email %>
-    <%= f.input :responsible_job_description %>
-  </div>
+<p>
+  <strong>Cnpj:</strong>
+  <%= company.cnpj %>
+</p>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+<p>
+  <strong>County subscription:</strong>
+  <%= company.county_subscription %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= company.address %>
+</p>
+
+<p>
+  <strong>Neighborhood:</strong>
+  <%= company.neighborhood %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= company.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= company.state %>
+</p>
+
+<p>
+  <strong>Postal code:</strong>
+  <%= company.postal_code %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= company.phone %>
+</p>
+
+<p>
+  <strong>Responsible name:</strong>
+  <%= company.responsible_name %>
+</p>
+
+<p>
+  <strong>Responsible email:</strong>
+  <%= company.responsible_email %>
+</p>
+
+<p>
+  <strong>Responsible job description:</strong>
+  <%= company.responsible_job_description %>
+</p>
