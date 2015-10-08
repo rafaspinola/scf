@@ -24,7 +24,7 @@
         <td><%= l p.due_date %></td>
         <td><%= ntc(p.value) %></td>
         <td><%= check_box "payment[#{p.id}]", "paid" %></td>
-        <td><%= pf.text_field :paid_date %></td>
+        <td><%= pf.date_field :paid_date, value: Date.today %></td>
         <% end %>
       </tr>
     <% end %>

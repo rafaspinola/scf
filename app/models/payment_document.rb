@@ -6,7 +6,7 @@ class PaymentDocument < ActiveRecord::Base
   validates_attachment_content_type :doc_file, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
 
   scope :to_be_generated, -> { where(generated: false) }
-  scope :to_be_confirmed, -> { includes(:subscription).where(paid_date: nil).order("subscriptions.payment_method") }
+  scope :to_be_confirmed, -> { includes(:subscription).where(paid_date: nil).where("due_date < ?", Date.today + 7.days).order("subscriptions.payment_method, due_date") }
 
   def self.generate_billing_number(course_payment_identifier, class_identifier, salesmen_identifier, sequence, payment_number, double_payment_number_digits = false)
     sprintf(get_billing_number_format(double_payment_number_digits), course_payment_identifier, class_identifier, salesmen_identifier, sequence, payment_number)
