@@ -2,6 +2,7 @@ class Course < ActiveRecord::Base
 
   has_many :course_classes
   has_many :prices
+  belongs_to :account
 
   validates :payment_identifier, uniqueness: true, length: { maximum: 1 }
 

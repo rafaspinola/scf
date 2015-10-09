@@ -34,13 +34,14 @@
             Cidade: <b><%= s.payer.city %></b>
             Estado: <b><%= s.payer.state %></b>
         </p>
-        <p>
-            Carregar PDF com os boletos
-        </p>
         <%= simple_form_for(s.payment_documents.first,
                             :html => {multipart: true},
                             :url => url_for(:action => 'insert', :controller => 'payment_documents'),
                             :method => 'post') do |f| %>
+            <%= f.association :bank, collection: Bank.financial, label: "Banco emissor dos boletos:" %>
+            <p style="font-weight: bold;">
+                Carregar PDF com os boletos:
+            </p>
             <%= f.file_field :doc_file %>
             <%= f.input :id, :as => :hidden, :input_html => { :value => s.payment_documents.first.id } %>
             <%= f.button :submit %>

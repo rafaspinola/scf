@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'payment_documents/payment'
   get 'payment_documents/edit'
   post 'payment_documents/update'
+  post 'payment_documents/confirm'
 
   resources :subscriptions
 

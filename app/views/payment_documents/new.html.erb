@@ -4,29 +4,33 @@
   <thead>
     <tr>
         <th></th>
-        <th>Banco</th>
+        <th>Banco de Origem</th>
         <th>Agência</th>
         <th>Conta</th>
+        <th>Nome do Emitente</th>
         <th>Número do Cheque</th>
         <th>Vencimento</th>
         <th>Valor</th>
+        <th>Banco de depósito</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-        <td colspan="7"><a href="#" id="copy">Copiar banco, ag&ecirc;ncia, e conta da primeira linha para todos</a></td>
+        <td colspan="9"><a href="#" id="copy">Copiar banco, ag&ecirc;ncia, e conta da primeira linha para todos</a></td>
     </tr>
     <% i = 0 %>
     <% @payments.each do |p| %>
         <tr>
         <%= fields_for "payments[]", p do |pf| %>
             <td style="text-align: right"><%= i = i+1 %></td>
-            <td><%= pf.text_field :bank %></td>
+            <td><%= pf.text_field :origin_bank %></td>
             <td><%= pf.text_field :agency %></td>
+            <td><%= pf.text_field :emittent %></td>
             <td><%= pf.text_field :account %></td>
             <td><%= pf.text_field :document_number %></td>
             <td><%= pf.text_field :due_date %></td>
             <td><%= pf.text_field :value, value: (@subscription.amount / @subscription.payments_quantity).to_s %></td>
+            <td><%= pf.select :bank_id, @financial_banks.collect {|p| [ p.name, p.id ] } %></td>
         <% end %>
         </tr>
     <% end %>

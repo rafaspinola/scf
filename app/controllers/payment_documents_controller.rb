@@ -10,6 +10,7 @@ class PaymentDocumentsController < ApplicationController
   end
 
   def insert
+    debugger
     params = payment_document_params
     params[:generated] = true
     @payment_document.update(params)
@@ -22,8 +23,15 @@ class PaymentDocumentsController < ApplicationController
     respond_with @payment_documents
   end
 
+  def confirm
+    debugger
+    PaymentDocument.process_paid_list(params[:payment])
+    redirect_to action: :payment
+  end
+
   def new
     @subscription = Subscription.find params[:subscription_id]
+    @financial_banks = Bank.financial
     redirect_to subscriptions_path if @subscription == nil
     @payments = []
     for i in 1..@subscription.payments_quantity
@@ -57,13 +65,16 @@ class PaymentDocumentsController < ApplicationController
     def build_payments(payments)
       np = []
       for i in 0..(payments.count - 1) do
+        debugger
         np << { kind: "C",
                 generated: true,
-                bank: payments[i][:bank],
+                origin_bank: payments[i][:origin_bank],
                 agency: payments[i][:agency],
-                account: payments[i][:account], 
+                account: payments[i][:account],
                 document_number: payments[i][:document_number], 
                 due_date: payments[i][:due_date], 
+                bank_id: payments[i][:bank_id],
+                emittent: payments[i][:emittent],
                 value: payments[i][:value] }
       end
       np
@@ -74,7 +85,7 @@ class PaymentDocumentsController < ApplicationController
     end
 
     def payment_document_params
-      params.require(:payment_document).permit(:id, :doc_file, :payments)
+      params.require(:payment_document).permit(:id, :doc_file, :payments, :bank_id)
     end
 
 end

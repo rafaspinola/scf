@@ -32,8 +32,8 @@ class SubscriptionsController < ApplicationController
 
   def create
     @subscription = Subscription.new(subscription_params)
-    @subscription.save
-    if @subscription.payment_method_requires_payment_document_input?
+    debugger
+    if @subscription.save && @subscription.payment_method_requires_payment_document_input?
       redirect_to(action: :new, controller: :payment_documents, :subscription_id => @subscription.id) 
     else
       respond_with(@subscription)

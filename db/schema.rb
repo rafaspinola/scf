@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929213622) do
+ActiveRecord::Schema.define(version: 20151009214235) do
 
   create_table "accounts", force: true do |t|
     t.string   "description"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20150929213622) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "financial",  default: false, null: false
+    t.boolean  "main",       default: false, null: false
   end
 
   create_table "companies", force: true do |t|
@@ -85,7 +87,10 @@ ActiveRecord::Schema.define(version: 20150929213622) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "payment_identifier"
+    t.integer  "account_id"
   end
+
+  add_index "courses", ["account_id"], name: "index_courses_on_account_id", using: :btree
 
   create_table "movements", force: true do |t|
     t.date     "due_date"
@@ -134,7 +139,7 @@ ActiveRecord::Schema.define(version: 20150929213622) do
     t.integer  "subscription_id"
     t.decimal  "value",                 precision: 10, scale: 2
     t.string   "document_number"
-    t.string   "bank"
+    t.string   "origin_bank"
     t.string   "agency"
     t.string   "account"
     t.date     "due_date"
@@ -147,8 +152,11 @@ ActiveRecord::Schema.define(version: 20150929213622) do
     t.integer  "doc_file_file_size"
     t.datetime "doc_file_updated_at"
     t.string   "kind"
+    t.integer  "bank_id"
+    t.string   "emittent"
   end
 
+  add_index "payment_documents", ["bank_id"], name: "index_payment_documents_on_bank_id", using: :btree
   add_index "payment_documents", ["subscription_id"], name: "index_payment_documents_on_subscription_id", using: :btree
 
   create_table "prices", force: true do |t|
@@ -158,7 +166,7 @@ ActiveRecord::Schema.define(version: 20150929213622) do
     t.integer  "payment_quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "enabled"
+    t.boolean  "active",                                    default: true, null: false
   end
 
   add_index "prices", ["course_id"], name: "index_prices_on_course_id", using: :btree

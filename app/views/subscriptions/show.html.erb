@@ -40,26 +40,30 @@
     <th>Banco</th>
     <th>Agência</th>
     <th>Conta</th>
+    <th>Nome do Emitente</th>
     <% end %>
     <th>Número do Documento</th>
     <th>Vencimento</th>
     <th>Valor</th>
     <th>Arquivo</th>
     <th>Pago?</th>
+    <th><%= (@subscription.payment_method_requires_payment_document_input? ? "Depositado no" : "Gerado no" ) + " banco" %> </th>
   </thead>
   <tbody>
     <% @subscription.payment_documents.each do |p| %>
       <tr>
         <% if @subscription.payment_method_requires_payment_document_input? %>
-        <td><%= p.bank %></td>
+        <td><%= p.origin_bank %></td>
         <td><%= p.agency %></td>
         <td><%= p.account %></td>
+        <td><%= p.emittent %></td>
         <% end %>
         <td><%= p.document_number %></td>
         <td><%= l p.due_date %></td>
         <td style="text-align: right;"><%= number_to_currency p.value %></td>
         <td><%= link_to("Visualizar", p.doc_file.url, target: "_blank") if p.doc_file? %></td>
         <td><%= p.paid_date == nil ? "Não" : p.paid_date %></td>
+        <td><%= p.bank %></td>
       </tr>
     <% end %>
   </tbody>
