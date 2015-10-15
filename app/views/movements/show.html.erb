@@ -1,39 +1,64 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Due date:</strong>
+  <strong><%= I18n.t('simple_form.labels.movement.due_date') %>:</strong>
   <%= @movement.due_date %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong><%= I18n.t('simple_form.labels.movement.description') %>:</strong>
   <%= @movement.description %>
 </p>
 
 <p>
-  <strong>Value:</strong>
+  <strong><%= I18n.t('simple_form.labels.movement.value') %>:</strong>
   <%= @movement.value %>
 </p>
 
 <p>
-  <strong>Course class:</strong>
+  <strong><%= I18n.t('simple_form.labels.movement.course_class') %>:</strong>
   <%= @movement.course_class %>
 </p>
 
 <p>
-  <strong>Account:</strong>
+  <strong><%= I18n.t('simple_form.labels.movement.account') %>:</strong>
   <%= @movement.account %>
 </p>
 
 <p>
-  <strong>Result center:</strong>
+  <strong><%= I18n.t('simple_form.labels.movement.result_center') %>:</strong>
   <%= @movement.result_center %>
 </p>
 
 <p>
-  <strong>Bank:</strong>
+  <strong><%= I18n.t('simple_form.labels.movement.bank') %>:</strong>
   <%= @movement.bank %>
 </p>
+
+<% if @movement.transfer then %>
+  <p>
+    <strong><%= I18n.t('simple_form.labels.movement.transfer') %> para:</strong>
+    <%= @movement.to_bank %>
+  </p>
+<% end %>
+
+<% if @movement.accountable then %>
+  <p>
+    Será enviado para a Contabilidade
+  </p>
+<% end %>
+
+<% if @movement.document_image? then %>
+  <p>
+    <%= link_to("Visualizar #{I18n.t('simple_form.labels.movement.document_image')}", @movement.document_image.url, target: "_blank") if @movement.document_image? %>
+  </p>
+<% end %>
+
+<% if @movement.receipt_image? then %>
+  <p>
+    <%= link_to("Visualizar #{I18n.t('simple_form.labels.movement.receipt_image')}", @movement.receipt_image.url, target: "_blank") if @movement.receipt_image? %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_movement_path(@movement) %> |
 <%= link_to 'Back', movements_path %>

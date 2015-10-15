@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009214235) do
+ActiveRecord::Schema.define(version: 20151015024042) do
 
   create_table "accounts", force: true do |t|
     t.string   "description"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20151009214235) do
   create_table "movements", force: true do |t|
     t.date     "due_date"
     t.string   "description"
-    t.decimal  "value",                precision: 10, scale: 2
+    t.decimal  "value",                       precision: 10, scale: 2
     t.integer  "course_class_id"
     t.integer  "account_id"
     t.integer  "result_center_id"
@@ -105,8 +105,16 @@ ActiveRecord::Schema.define(version: 20151009214235) do
     t.boolean  "transfer"
     t.integer  "to_bank_id"
     t.boolean  "accountable"
-    t.boolean  "credit",                                        default: false, null: false
+    t.boolean  "credit",                                               default: false, null: false
     t.integer  "transfer_movement_id"
+    t.string   "document_image_file_name"
+    t.string   "document_image_content_type"
+    t.integer  "document_image_file_size"
+    t.datetime "document_image_updated_at"
+    t.string   "receipt_image_file_name"
+    t.string   "receipt_image_content_type"
+    t.integer  "receipt_image_file_size"
+    t.datetime "receipt_image_updated_at"
   end
 
   add_index "movements", ["account_id"], name: "index_movements_on_account_id", using: :btree

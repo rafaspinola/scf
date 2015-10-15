@@ -5,11 +5,15 @@ class Movement < ActiveRecord::Base
   belongs_to :bank
   belongs_to :to_bank, class_name: "Bank", foreign_key: "to_bank_id"
   has_one :transfer_movement, class_name: "Movement", foreign_key: "transfer_movement_id"
+  has_attached_file :document_image
+  has_attached_file :receipt_image
 
   scope :recent, -> { where("due_date >= ?", Date.today - 3.days) }
 
   validates_presence_of :due_date, :description, :value, :account, :result_center, :bank
   validates_numericality_of :value, message: "O valor precisa ser um número"
+  validates_attachment_content_type :document_image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
+  validates_attachment_content_type :receipt_image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
 
   before_create :create_transfer_movement
   

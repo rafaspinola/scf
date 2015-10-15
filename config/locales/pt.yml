@@ -56,7 +56,10 @@ pt:
         account: "Conta"
         result_center: "Centro de Resultado"
         bank: "Conta corrente/caixa"
+        transfer: "Transferência"
         to_bank: "Para a conta corrente/caixa"
+        document_image: "Imagem escaneada do documento (boleto, conta...)"
+        receipt_image: "Comprovante de pagamento"
   payment_documents:
     generate: "Geração de Boletos"
   date:
