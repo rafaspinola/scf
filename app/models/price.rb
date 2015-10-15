@@ -11,6 +11,10 @@ class Price < ActiveRecord::Base
   	self.payment_quantity * self.payment_value
   end
 
+  def to_s
+    "#{self.description} - #{ActionController::Base.helpers.pluralize(self.payment_quantity, 'parcela')} de #{ActionController::Base.helpers.number_to_currency(self.payment_value)}"
+  end
+
   protected
 
   def check_subscriptions

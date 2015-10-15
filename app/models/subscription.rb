@@ -19,7 +19,7 @@ class Subscription < ActiveRecord::Base
   validates_inclusion_of :retains_iss, :in => [true, false], message: "SOMENTE PARA EMPRESAS COM SEDE EM BELO HORIZONTE: Informe se a empresa retém ISS ou não."
   validates_associated :participant, :company
   validate :check_pf_pj_info
-  validate :check_first_payment_date
+  validate :check_first_payment_date # create
 
   after_validation :clear_empty_company
   before_create :fill_sequence, :fill_price
@@ -46,6 +46,14 @@ class Subscription < ActiveRecord::Base
 
   def has_observations?
     (!self.observations != nil && !self.observations.empty?)
+  end
+
+  def has_generated_payment_documents?
+    has = false
+    self.payment_documents.each do |p|
+      has = has || p.generated
+    end
+    has
   end
 
   def first_training_date
@@ -109,6 +117,6 @@ class Subscription < ActiveRecord::Base
   end
 
   def check_first_payment_date
-    errors.add(:first_payment_date, "O primeiro pagamento não pode ser posterior ao início da turma.") if first_payment_date > first_training_date
+    errors.add(:first_payment_date, "O primeiro pagamento não pode ser posterior ao início da turma.") if new_record? && (first_payment_date > first_training_date)
   end
 end

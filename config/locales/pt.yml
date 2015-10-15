@@ -20,6 +20,7 @@ pt:
         retains_iss: 'Retém ISS?'
         charge_company: 'Cobrança emitida para Pessoa Jurídica?'
         observations: 'Observações'
+        price: 'Condição de pagamento'
       participant:
         cpf: 'CPF'
         name: 'Nome'

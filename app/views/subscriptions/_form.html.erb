@@ -4,14 +4,19 @@
   <div class="form-inputs panel panel-primary">
     <div class="panel-heading">Dados da Venda</div>
     <div class="panel-body">
-      <%= f.association :course_class, collection: CourseClass.future, input_html: {
-          dataUrl: prices_course_class_path(':course_class_id', format: :json),
-          dataTarget: '#subscription_price_id'
-        } %>
+      <% if @subscription.new_record? then %>
+        <%= f.association :course_class, collection: CourseClass.future, input_html: {
+            dataUrl: prices_course_class_path(':course_class_id', format: :json),
+            dataTarget: '#subscription_price_id'
+          } %>
+      <% else %>
+        <%= f.label :course_class %>
+        <%= f.hint @subscription.course_class.to_s %>
+      <% end %>
     <% if current_user.admin? %>
       <%= f.association :salesman %>
     <% else %>
-      <%= hidden_field_tag "subscription[salesman_id]", current_user.salesman.id %>
+      <%= f.input :salesman, as: :hidden %>
     <% end %>
     </div>
   </div>
@@ -58,13 +63,36 @@
   <div class="form-inputs panel panel-primary">
     <div class="panel-heading">Dados de Cobrança</div>
     <div class="panel-body">
-      <a name="conditions"></a>
-      <%= f.input :price_id, as: :select, collection: ["Escolha a turma"], include_blank: false %> <%= link_to "Atualizar forma de pagamento", "#conditions", onclick: "$('#subscription_course_class_id').priceSelectable();$('#subscription_course_class_id').trigger('change');$('#link_update').delete();", id: "link_update" %>
-      <%= f.input :payment_method, collection: [["Boleto bancário", "B"], ["Depósito em conta corrente", "D"], ["Cheques", "C"]] %>
-      <%= f.input :first_payment_date, as: :date, start_year: Date.today.year, end_year: Date.today.year + 1 %>
-      <%= f.input :charge_company, as: :radio_buttons %>
-      <%= f.input :retains_iss, as: :radio_buttons %>
-      <%= f.input :observations %>
+      <!-- TODO: futuramente permitir editar forma de pagamento caso não tenha gerado documentos @subscription.has_generated_payment_documents?-->
+      <% unless @subscription.new_record? %>
+        <%= f.label :price %>
+        <%= f.hint @subscription.price.to_s %>
+        <%= f.input :price_id, as: :hidden %>
+        <%= f.label :payment_method %>
+        <%= f.hint @subscription.payment_method %>
+        <%= f.input :payment_method, as: :hidden %>
+        <%= f.label :first_payment_date %>
+        <%= f.hint l(@subscription.first_payment_date) %>
+        <%= f.input :first_payment_date, as: :hidden %>
+        <%= f.label :charge_company %>
+        <%= f.hint (@subscription.charge_company ? "Sim" : "Não") %>
+        <%= f.input :charge_company, as: :hidden %>
+        <%= f.label :retains_iss %>
+        <%= f.hint (@subscription.retains_iss ? "Sim" : "Não") %>
+        <%= f.input :retains_iss, as: :hidden %>
+        <% unless @subscription.observations == nil || @subscription.observations.empty? %>
+        <%= f.label :observations %>
+        <%= f.hint @subscription.observations %>
+        <% end %>
+      <% else %>
+        <a name="conditions"></a>
+        <%= f.input :price_id, as: :select, collection: ["Escolha a turma"], include_blank: false %> <%= link_to "Atualizar forma de pagamento", "#conditions", onclick: "$('#subscription_course_class_id').priceSelectable();$('#subscription_course_class_id').trigger('change');$('#link_update').delete();", id: "link_update" %>
+        <%= f.input :payment_method, collection: [["Boleto bancário", "B"], ["Depósito em conta corrente", "D"], ["Cheques", "C"]] %>
+        <%= f.input :first_payment_date, as: :date, start_year: Date.today.year, end_year: Date.today.year + 1 %>
+        <%= f.input :charge_company, as: :radio_buttons %>
+        <%= f.input :retains_iss, as: :radio_buttons %>
+        <%= f.input :observations %>
+      <% end %>
     </div>
   </div>
   <div class="form-actions">

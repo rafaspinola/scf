@@ -12,7 +12,7 @@ class Company < ActiveRecord::Base
   def empty?
     emp = true
     self.attributes.each_pair do |k, v|
-      emp = emp && (v == nil || v.empty?)
+      emp = emp && (v == nil || v.to_s.empty?)
     end
     emp
   end
