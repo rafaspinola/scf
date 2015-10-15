@@ -64,6 +64,7 @@
     <div class="panel-heading">Dados de Cobrança</div>
     <div class="panel-body">
       <!-- TODO: futuramente permitir editar forma de pagamento caso não tenha gerado documentos @subscription.has_generated_payment_documents?-->
+      <p>Depois de digitados, os dados de cobrança só podem ser alterados pelo escritório.</p>
       <% unless @subscription.new_record? %>
         <%= f.label :price %>
         <%= f.hint @subscription.price.to_s %>
