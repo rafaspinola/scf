@@ -71,23 +71,17 @@
       <% unless @subscription.new_record? %>
         <%= f.label :price %>
         <%= f.hint @subscription.price.to_s %>
-        <%= f.input :price_id, as: :hidden, :input_html => { :value => @subscription.price_id } %>
         <%= f.label :payment_method %>
         <%= f.hint @subscription.payment_method %>
-        <%= f.input :payment_method, as: :hidden, :input_html => { :value => @subscription.payment_method } %>
         <%= f.label :first_payment_date %>
         <%= f.hint l(@subscription.first_payment_date) %>
-        <%= f.input :first_payment_date, as: :hidden, :input_html => { :value => @subscription.first_payment_date } %>
         <%= f.label :charge_company %>
         <%= f.hint (@subscription.charge_company ? "Sim" : "Não") %>
-        <%= f.input :charge_company, as: :hidden, :input_html => { :value => @subscription.charge_company } %>
         <%= f.label :retains_iss %>
         <%= f.hint (@subscription.retains_iss ? "Sim" : "Não") %>
-        <%= f.input :retains_iss, as: :hidden, :input_html => { :value => @subscription.retains_iss } %>
         <% unless @subscription.observations == nil || @subscription.observations.empty? %>
         <%= f.label :observations %>
         <%= f.hint @subscription.observations %>
-        <%= f.input :observations, as: :hidden, :input_html => { :value => @subscription.observations } %>
         <% end %>
       <% else %>
         <a name="conditions"></a>
