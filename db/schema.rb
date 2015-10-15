@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015024042) do
+ActiveRecord::Schema.define(version: 20151015033656) do
 
   create_table "accounts", force: true do |t|
     t.string   "description"
@@ -162,9 +162,11 @@ ActiveRecord::Schema.define(version: 20151015024042) do
     t.string   "kind"
     t.integer  "bank_id"
     t.string   "emittent"
+    t.integer  "movement_id"
   end
 
   add_index "payment_documents", ["bank_id"], name: "index_payment_documents_on_bank_id", using: :btree
+  add_index "payment_documents", ["movement_id"], name: "index_payment_documents_on_movement_id", using: :btree
   add_index "payment_documents", ["subscription_id"], name: "index_payment_documents_on_subscription_id", using: :btree
 
   create_table "prices", force: true do |t|

@@ -2,6 +2,7 @@
 class PaymentDocument < ActiveRecord::Base
   belongs_to :subscription
   belongs_to :bank
+  belongs_to :movement
   has_attached_file :doc_file
 
   validates_attachment_content_type :doc_file, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
@@ -75,8 +76,6 @@ class PaymentDocument < ActiveRecord::Base
   # Must be inside transaction
   def payment(paid_date)
     raise "error" if ActiveRecord::Base.connection.open_transactions == 0
-    self.paid_date = paid_date
-    raise "error" unless self.save
     m = Movement.new(due_date: paid_date,
                         description: "#{self.subscription.payer.name} - #{self.document_number}",
                         value: self.value,
@@ -87,6 +86,9 @@ class PaymentDocument < ActiveRecord::Base
                         accountable: true,
                         credit: true)
     raise "error" unless m.save
+    self.paid_date = paid_date
+    self.movement_id = m.id
+    raise "error" unless self.save
   end
 
   def paid?

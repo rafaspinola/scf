@@ -34,7 +34,7 @@
   <strong>Payments:</strong>
 </p>
 
-<table class="table table-striped">
+<table class="table table-striped" id="subscription_payment_documents">
   <thead>
     <% if @subscription.payment_method_requires_payment_document_input? %>
     <th>Banco</th>
@@ -59,10 +59,10 @@
         <td><%= p.emittent %></td>
         <% end %>
         <td><%= p.document_number %></td>
-        <td><%= l p.due_date %></td>
+        <td><%= l(p.due_date) %> %></td>
         <td style="text-align: right;"><%= number_to_currency p.value %></td>
         <td><%= link_to("Visualizar", p.doc_file.url, target: "_blank") if p.doc_file? %></td>
-        <td><%= p.paid_date == nil ? "Não" : p.paid_date %></td>
+        <td><%= p.paid_date == nil ? "Não" : raw("#{p.paid_date} #{link_to(image_tag("zoom.png"), p.movement)}") %></td>
         <td><%= p.bank %></td>
       </tr>
     <% end %>

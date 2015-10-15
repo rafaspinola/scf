@@ -60,5 +60,11 @@
   </p>
 <% end %>
 
+<% unless @movement.payment_document == nil %>
+  <p>
+    <%= link_to "Inscrição de origem", @movement.payment_document.subscription %>
+  </p>
+<% end %>
+
 <%= link_to 'Edit', edit_movement_path(@movement) %> |
 <%= link_to 'Back', movements_path %>
