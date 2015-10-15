@@ -52,7 +52,6 @@ class PaymentDocument < ActiveRecord::Base
   # TODO: os elementos da lista vem tudo como string
   def self.process_paid_list(list)
     to_be_processed = normalize_list(filter_paid(list))
-    debugger
     ActiveRecord::Base.transaction do
       documents_to_be_updated = PaymentDocument.where("id in (?)", to_be_processed.keys)
       documents_to_be_updated.each do |d|

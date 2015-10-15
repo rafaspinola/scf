@@ -10,7 +10,6 @@ class PaymentDocumentsController < ApplicationController
   end
 
   def insert
-    debugger
     params = payment_document_params
     params[:generated] = true
     @payment_document.update(params)
@@ -24,7 +23,6 @@ class PaymentDocumentsController < ApplicationController
   end
 
   def confirm
-    debugger
     PaymentDocument.process_paid_list(params[:payment])
     redirect_to action: :payment
   end
@@ -65,7 +63,6 @@ class PaymentDocumentsController < ApplicationController
     def build_payments(payments)
       np = []
       for i in 0..(payments.count - 1) do
-        debugger
         np << { kind: "C",
                 generated: true,
                 origin_bank: payments[i][:origin_bank],
