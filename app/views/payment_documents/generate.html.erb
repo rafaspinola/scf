@@ -32,7 +32,8 @@
             Endereço: <b><%= s.payer.address %></b><br />
             Bairro: <b><%= s.payer.neighborhood %></b>
             Cidade: <b><%= s.payer.city %></b>
-            Estado: <b><%= s.payer.state %></b>
+            Estado: <b><%= s.payer.state %></b><br />
+            E-mail: <b><%= s.payer.email %></b>
         </p>
         <%= simple_form_for(s.payment_documents.first,
                             :html => {multipart: true},

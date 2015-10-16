@@ -9,6 +9,10 @@ class Company < ActiveRecord::Base
   	self.cnpj
   end
 
+  def email
+    self.responsible_email
+  end
+
   def empty?
     emp = true
     self.attributes.each_pair do |k, v|
