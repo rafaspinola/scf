@@ -2,17 +2,11 @@
 <% if user_signed_in? %>
   <li><%= link_to 'Inscrições', new_subscription_path %></li>
   <li><%= link_to 'Turmas', course_classes_path %></li>
-  <li><%= link_to 'Perfil', edit_user_registration_path %></li>
-<% end %>
-<% if user_signed_in? %>
   <% if current_user.admin? %>
-    <li><%= link_to 'Vendedores', salesmen_path %></li>
-    <li><%= link_to 'Trainers', trainers_path %></li>
-    <li><%= link_to 'Financeiro', movements_path %></li>
-    <li><%= link_to 'Gerar Boletos', payment_documents_generate_path %></li>
-    <li><%= link_to 'Usuários', users_path %></li>
+    <li><%= link_to 'Movimentos', movements_path %></li>
+    <li><%= link_to 'Boletos', payment_documents_generate_path %></li>
+    <li><%= link_to 'Recebimentos', payment_documents_payment_path %></li>
   <% end %>
-<% end %>
-<% if user_signed_in? %>
+  <li><%= link_to 'Perfil', edit_user_registration_path %></li>
   <li><%= link_to 'Sair', destroy_user_session_path, :method=>'delete' %></li>
 <% end %>
