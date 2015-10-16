@@ -6,13 +6,15 @@ class MovementsController < ApplicationController
 
   def index
     @movements = if (params[:sd] || params[:ed])
-      Movement.all.includes(:account, :bank, :result_center).order(:due_date)
+      Movement.all.includes(:account, :bank, :result_center, :course_class).order(:due_date)
     else
-      Movement.recent.includes(:account, :bank, :result_center).order(:due_date)
+      Movement.recent.includes(:account, :bank, :result_center, :course_class).order(:due_date)
     end
     @movements = @movements.where("due_date >= ?", params[:sd]) if params[:sd] && !params[:sd].empty?
     @movements = @movements.where("due_date <= ?", params[:ed]) if params[:ed] && !params[:ed].empty?
     @movements = @movements.where("description LIKE ?", "%#{params[:d]}%") if params[:d] && !params[:d].empty?
+    @movements = @movements.where("bank_id = ?", params[:b]) if params[:b] && !params[:b].empty?
+    @banks = Bank.all
     respond_with(@movements)
   end
 

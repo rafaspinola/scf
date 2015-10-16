@@ -1,14 +1,22 @@
-<h1>Movimentos Financeiros</h1>
- 
-<%= form_tag(movements_path, method: :get) do %>
-<b>Mostrar:</b> <%= link_to "Últimos 3 dias", movements_path(:sd => 3.days.ago.strftime("%Y-%m-%d")) %>&nbsp;
-<%= link_to "Últimos 7 dias", movements_path(:sd => 7.days.ago.strftime("%Y-%m-%d")) %>&nbsp;
-<%= link_to "Últimos 15 dias", movements_path(:sd => 15.days.ago.strftime("%Y-%m-%d")) %>&nbsp;
-<%= link_to "Últimos 30 dias", movements_path(:sd => 30.days.ago.strftime("%Y-%m-%d")) %><br />
-Começando em <%= date_field_tag "sd", params[:sd] %> até <%= date_field_tag "ed", params[:ed] %>
-Descrição: <%= text_field_tag "d", params[:d] %>
-<%= submit_tag "Pesquisar" %>
-<% end %>
+<div class="form-inputs panel panel-primary" style="margin-top:10px;">
+    <div class="panel-heading"><a class="search-link" href="javascript:$('#search-params').toggle()">Pesquisar Movimentos Financeiros (clique para expandir)</a></div>
+    <div id="search-params" class="panel-body" style="display: none">
+      <%= form_tag(movements_path, method: :get) do %>
+      <p><b>Mostrar:</b> <%= link_to "Últimos 3 dias", movements_path(:sd => 3.days.ago.strftime("%Y-%m-%d")) %>&nbsp;
+      <%= link_to "Últimos 7 dias", movements_path(:sd => 7.days.ago.strftime("%Y-%m-%d")) %>&nbsp;
+      <%= link_to "Últimos 15 dias", movements_path(:sd => 15.days.ago.strftime("%Y-%m-%d")) %>&nbsp;
+      <%= link_to "Últimos 30 dias", movements_path(:sd => 30.days.ago.strftime("%Y-%m-%d")) %></p>
+      <p>Período específico começando em <%= date_field_tag "sd", params[:sd] %> até <%= date_field_tag "ed", params[:ed] %></p>
+      <p>Descrição: <%= text_field_tag "d", params[:d] %></p>
+      <p>Exibir somente conta/caixa: <%= select_tag "b", options_from_collection_for_select(@banks, "id", "name"), prompt: "Todos" %></p>
+      <p><%= submit_tag "Pesquisar" %></p>
+      <% end %>
+    </div>
+  </div>
+
+
+
+
 
 <table class="table table-striped">
   <thead>
