@@ -19,6 +19,7 @@ class PaymentDocumentsController < ApplicationController
 
   def payment
     @payment_documents = PaymentDocument.to_be_confirmed
+    debugger
     respond_with @payment_documents
   end
 

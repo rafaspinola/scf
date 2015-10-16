@@ -16,7 +16,7 @@
   </thead>
   <tbody>
     <tr>
-        <td colspan="9"><a href="#" id="copy">Copiar banco, ag&ecirc;ncia, e conta da primeira linha para todos</a></td>
+        <td colspan="9"><a href="javascript:copy();" id="copy">Copiar banco, ag&ecirc;ncia, e conta da primeira linha para todos</a></td>
     </tr>
     <% i = 0 %>
     <% @payments.each do |p| %>
@@ -25,8 +25,8 @@
             <td style="text-align: right"><%= i = i+1 %></td>
             <td><%= pf.text_field :origin_bank %></td>
             <td><%= pf.text_field :agency %></td>
-            <td><%= pf.text_field :emittent %></td>
             <td><%= pf.text_field :account %></td>
+            <td><%= pf.text_field :emittent %></td>
             <td><%= pf.text_field :document_number %></td>
             <td><%= pf.text_field :due_date %></td>
             <td><%= pf.text_field :value, value: (@subscription.amount / @subscription.payments_quantity).to_s %></td>

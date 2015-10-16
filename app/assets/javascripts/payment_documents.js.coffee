@@ -5,8 +5,3 @@
 #$ ->
 #  $('#subscription_course_class_id').priceSelectable()
 
-#$ ->
-#	$('#copy').click(e) ->
-#		e.preventDefault()
-#		bank = $('#payments_table tbody tr:first input#payments__bank').attr('value')
-#		
