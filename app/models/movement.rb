@@ -6,6 +6,7 @@ class Movement < ActiveRecord::Base
   belongs_to :to_bank, class_name: "Bank", foreign_key: "to_bank_id"
   has_one :payment_document
   has_one :transfer_movement, class_name: "Movement", foreign_key: "transfer_movement_id"
+  has_many :materials
   has_attached_file :document_image
   has_attached_file :receipt_image
 

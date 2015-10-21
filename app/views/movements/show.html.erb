@@ -66,5 +66,22 @@
   </p>
 <% end %>
 
+<% if @movement.bank.material then %>
+<table class="table table-striped" id="subscription_payment_documents">
+  <thead>
+    <th><%= I18n.t('simple_form.labels.material.description') %></th>
+    <th><%= I18n.t('simple_form.labels.material.quantity') %></th>
+    <th><%= I18n.t('simple_form.labels.material.unit_value') %></th>
+  </thead>
+  <tbody>
+    <% @movement.materials.each do |m| %>
+      <td><%= m.description %></td>
+      <td><%= m.quantity %></td>
+      <td><%= number_to_currency m.unit_value %></td>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
 <%= link_to 'Edit', edit_movement_path(@movement) %> |
 <%= link_to 'Back', movements_path %>

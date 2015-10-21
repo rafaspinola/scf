@@ -1,6 +1,10 @@
 pt:
   simple_form:
     labels:
+      material:
+        description: "Descrição"
+        quantity: "Quantidade"
+        unit_value: "Valor Unitário"
       course:
         name: "Nome"
         code: "Sigla"
