@@ -49,12 +49,11 @@ Rails.application.routes.draw do
   resources :users
   devise_scope :user do
     authenticated :user do
-      root 'visitors#index', as: :authenticated_root
+      root 'pages#index', as: :authenticated_root
     end
 
     unauthenticated do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
-  root to: 'visitors#index'
 end

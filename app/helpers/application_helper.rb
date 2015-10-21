@@ -54,9 +54,9 @@ module ApplicationHelper
   def check_number_count(data, amount, max = 0)
     len = clear_number(data).length
     if max == 0 then
-      return len == amount
+      return len == amount || len == 0
     else
-      return len >= amount && len <= amount
+      return (len >= amount && len <= max) || len == 0
     end
   end
 end
