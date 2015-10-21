@@ -10,6 +10,7 @@ class Movement < ActiveRecord::Base
   has_attached_file :receipt_image
 
   scope :recent, -> { where("due_date >= ?", Date.today - 3.days) }
+  scope :materialsa, -> { joins(:bank).where("material = 1").order("due_date DESC") }
 
   validates_presence_of :due_date, :description, :value, :account, :result_center, :bank
   validates_numericality_of :value, message: "O valor precisa ser um número"
@@ -18,6 +19,9 @@ class Movement < ActiveRecord::Base
 
   before_create :create_transfer_movement
   
+  def to_s
+    "#{self.due_date.strftime('%d/%m/%Y')} - #{self.description} - #{self.value}"
+  end
 
   def create_transfer_movement
   	if self.transfer then

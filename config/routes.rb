@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :materials
+
   get 'pages/admin'
 
   resources :prices

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015033656) do
+ActiveRecord::Schema.define(version: 20151021010106) do
 
   create_table "accounts", force: true do |t|
     t.string   "description"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20151015033656) do
     t.datetime "updated_at"
     t.boolean  "financial",  default: false, null: false
     t.boolean  "main",       default: false, null: false
+    t.boolean  "material",   default: false, null: false
   end
 
   create_table "companies", force: true do |t|
@@ -91,6 +92,17 @@ ActiveRecord::Schema.define(version: 20151015033656) do
   end
 
   add_index "courses", ["account_id"], name: "index_courses_on_account_id", using: :btree
+
+  create_table "materials", force: true do |t|
+    t.string   "description"
+    t.integer  "quantity"
+    t.decimal  "unit_value",  precision: 10, scale: 0
+    t.integer  "movement_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "materials", ["movement_id"], name: "index_materials_on_movement_id", using: :btree
 
   create_table "movements", force: true do |t|
     t.date     "due_date"
@@ -176,7 +188,7 @@ ActiveRecord::Schema.define(version: 20151015033656) do
     t.integer  "payment_quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",                                    default: true, null: false
+    t.boolean  "active"
   end
 
   add_index "prices", ["course_id"], name: "index_prices_on_course_id", using: :btree
