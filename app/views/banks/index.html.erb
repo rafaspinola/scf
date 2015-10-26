@@ -12,9 +12,9 @@
     <% @banks.each do |bank| %>
       <tr>
         <td><%= bank.name %></td>
-        <td><%= link_to 'Show', bank %></td>
-        <td><%= link_to 'Edit', edit_bank_path(bank) %></td>
-        <td><%= link_to 'Destroy', bank, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t("commands.show"), bank %></td>
+        <td><%= link_to t("commands.edit"), edit_bank_path(bank) %></td>
+        <td><%= link_to t("commands.destroy"), bank, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

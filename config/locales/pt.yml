@@ -267,6 +267,11 @@ pt:
       last_word_connector: " e "
       two_words_connector: " e "
       words_connector: ", "
+  commands:
+    show: "Mostrar"
+    edit: "Editar"
+    destroy: "Apagar"
+    back: "Voltar"
   time:
     am: ''
     formats:

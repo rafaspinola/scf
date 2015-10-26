@@ -20,9 +20,9 @@
         <td><%= price.payment_value %></td>
         <td><%= price.payment_quantity %></td>
         <td><%= price.active %></td>
-        <td><%= link_to 'Show', price %></td>
-        <td><%= link_to 'Edit', edit_price_path(price) %></td>
-        <td><%= link_to 'Destroy', price, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t("commands.show"), price %></td>
+        <td><%= link_to t("commands.edit"), edit_price_path(price) %></td>
+        <td><%= link_to t("commands.destroy"), price, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

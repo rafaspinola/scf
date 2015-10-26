@@ -20,9 +20,9 @@
         <td><%= subscription.company %></td>
         <td><%= subscription.salesman %></td>
         <td><%= subscription.amount %></td>
-        <td><%= link_to 'Show', subscription %></td>
-        <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
-        <td><%= link_to 'Destroy', subscription, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t("commands.show"), subscription %></td>
+        <td><%= link_to t("commands.edit"), edit_subscription_path(subscription) %></td>
+        <td><%= link_to t("commands.destroy"), subscription, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

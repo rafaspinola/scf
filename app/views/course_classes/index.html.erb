@@ -20,8 +20,8 @@
         <td><%= course_class.city %></td>
         <td><%= course_class.begin_date %></td>
         <td><%= course_class.trainer_names %></td>
-        <td><%= link_to 'Show', course_class %></td>
-        <td><%= link_to 'Edit', edit_course_class_path(course_class) %></td>
+        <td><%= link_to t("commands.show"), course_class %></td>
+        <td><%= link_to t("commands.edit"), edit_course_class_path(course_class) %></td>
       </tr>
     <% end %>
   </tbody>

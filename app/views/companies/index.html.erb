@@ -34,9 +34,9 @@
         <td><%= company.responsible_name %></td>
         <td><%= company.responsible_email %></td>
         <td><%= company.responsible_job_description %></td>
-        <td><%= link_to 'Show', company %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t("commands.show"), company %></td>
+        <td><%= link_to t("commands.edit"), edit_company_path(company) %></td>
+        <td><%= link_to t("commands.destroy"), company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

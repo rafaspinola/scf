@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
   respond_to :html
 
   def index
-    @accounts = Account.all
+    @accounts = Account.ordered_list
     respond_with(@accounts)
   end
 

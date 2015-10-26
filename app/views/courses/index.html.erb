@@ -14,8 +14,8 @@
       <tr>
         <td><%= course.name %></td>
         <td><%= course.code %></td>
-        <td><%= link_to 'Show', course %></td>
-        <td><%= link_to 'Edit', edit_course_path(course) %></td>
+        <td><%= link_to t("commands.show"), course %></td>
+        <td><%= link_to t("commands.edit"), edit_course_path(course) %></td>
       </tr>
     <% end %>
   </tbody>

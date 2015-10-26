@@ -25,6 +25,6 @@
   <%= @price.active %>
 </p>
 
-<%= link_to 'Edit', edit_price_path(@price) %> |
-<%= link_to 'Back', prices_path %> |
+<%= link_to t("commands.edit"), edit_price_path(@price) %> |
+<%= link_to t("commands.back"), prices_path %> |
 <%= link_to 'New', new_price_path %>

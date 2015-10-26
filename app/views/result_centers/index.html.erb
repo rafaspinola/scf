@@ -12,9 +12,9 @@
     <% @result_centers.each do |result_center| %>
       <tr>
         <td><%= result_center.name %></td>
-        <td><%= link_to 'Show', result_center %></td>
-        <td><%= link_to 'Edit', edit_result_center_path(result_center) %></td>
-        <td><%= link_to 'Destroy', result_center, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t("commands.show"), result_center %></td>
+        <td><%= link_to t("commands.edit"), edit_result_center_path(result_center) %></td>
+        <td><%= link_to t("commands.destroy"), result_center, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -20,9 +20,9 @@
         <td><%= salesman.agency %></td>
         <td><%= salesman.account %></td>
         <td><%= salesman.operation %></td>
-        <td><%= link_to 'Show', salesman %></td>
-        <td><%= link_to 'Edit', edit_salesman_path(salesman) %></td>
-        <td><%= link_to 'Destroy', salesman, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t("commands.show"), salesman %></td>
+        <td><%= link_to t("commands.edit"), edit_salesman_path(salesman) %></td>
+        <td><%= link_to t("commands.destroy"), salesman, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
