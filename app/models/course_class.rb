@@ -54,6 +54,10 @@ class CourseClass < ActiveRecord::Base
     create_course_class_dates(CourseClassDate.get_dates_from_list(self.date_list))   
   end
 
+  def date_list_edit
+    self.course_class_dates.map{ |d| (d.day.year == Date.today.year ? d.day.strftime("%d/%m") : d.day.strftime("%d/%m/%Y")) }.join(" ")
+  end
+
   protected
 
   def create_course_class_dates(dates)

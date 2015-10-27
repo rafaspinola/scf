@@ -8,7 +8,7 @@
     <%= f.input :city %>
     <%= f.input :address %>
     <%= f.input :identifier %>
-    <%= f.input :date_list %>
+    <%= f.input :date_list, input_html: { value: @course_class.date_list_edit } %>
     <%= f.input :start_time %>
     <%= f.input :end_time %>
 
